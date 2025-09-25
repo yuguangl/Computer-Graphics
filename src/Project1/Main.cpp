@@ -26,205 +26,40 @@
 #pragma warning( disable : 26451 )
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#define GLM_
 
-//#define sandbox 
-
-#ifdef sandbox
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
-// settings
-const unsigned int SCR_WIDTH = 1280;
-const unsigned int SCR_HEIGHT = 720;
-
-unsigned int texture;
-
-// image buffer used by raster drawing basics.cpp
-extern unsigned char imageBuff[512][512][3];
-
-using namespace std;
-
-int myTexture();
-int RayTracer();
-
-void setupTextures()
-{
-    // create textures 
-        // -------------------------
-    glGenTextures(1, &texture);
-
-    // texture is a buffer we will be generating for pixel experiments
-    glBindTexture(GL_TEXTURE_2D, texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
-
-    // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    // set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    // load image, create texture and generate mipmaps
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 512, 512, 0, GL_RGB, GL_UNSIGNED_BYTE, (const void*)imageBuff);
-    glGenerateMipmap(GL_TEXTURE_2D);
-}
-
-void drawIMGUI() {
-    // Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-    {
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        static float f = 0.0f;
-
-        ImGui::Begin("Graphics For Games");  // Create a window and append into it.
-
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        /*
-
-        //ImGui::Checkbox("Use Offscreen Buffer", &offScreen);
-
-        static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput;
-        ImGui::InputTextMultiline("Vertex Shader", vtext, IM_ARRAYSIZE(vtext), ImVec2(-FLT_MIN, ImGui::GetTextLineHeight() * 16), flags);
-        ImGui::InputTextMultiline("Fragment Shader", ftext, IM_ARRAYSIZE(ftext), ImVec2(-FLT_MIN, ImGui::GetTextLineHeight() * 16), flags);
-
-        if (ImGui::Button("Use Shaders", ImVec2(100, 20)))
-            ourShader.reload(vtext, ftext);
-
-        ImGui::SameLine(115);
-
-        if (ImGui::Button("Save Shaders", ImVec2(120, 20)))
-        {
-            saveShaders();
-        }
-
-        ImGui::SameLine(240);
-
-        if (ImGui::Button("Swap Texture", ImVec2(100, 20)))
-            nTexture ^= 1;
-
-        ImGui::InputFloat4("one", myMatrix[0]);
-        ImGui::InputFloat4("two", myMatrix[1]);
-        ImGui::InputFloat4("three", myMatrix[2]);
-        ImGui::InputFloat4("four", myMatrix[3]);
-        */
-
-        ImGui::Image((void*)(intptr_t)texture, ImVec2(512, 512));
-        //ImGui::Image((void*)(intptr_t)-1, ImVec2(512, 512));
-
-        ImGui::End();
-
-        // IMGUI Rendering
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-    }
-}
-
-int main()
-{
-    // glfw: initialize and configure
-    // ------------------------------
-    glfwInit();
-    const char* glsl_version = "#version 150";
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-    // glfw window creation
-    // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Graphics4Games Fall 2021", NULL, NULL);
-    if (window == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGui::StyleColorsDark();
-
-    // Setup Platform/Renderer backends
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
-
-    myTexture();
-    RayTracer();
-
-    setupTextures();
-
-    // render loop
-    // -----------
-
-    while (!glfwWindowShouldClose(window))
-    {
-        // glfw: poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
-        glfwPollEvents();
-
-        // input
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, true);
-
-        // render background
-        // ------
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glClear(GL_DEPTH_BUFFER_BIT);
-
-        // draw stuff here!
-
-        drawIMGUI();
-        glfwSwapBuffers(window);
-    }
-
-    // glfw: terminate, clearing all previously allocated GLFW resources.
-    // ------------------------------------------------------------------
-    glfwTerminate();
-    return 0;
-}
-
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    // make sure the viewport matches the new window dimensions
-    glViewport(0, 0, width, height);
-}
-#else
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
+void drawPoint(int p1[], int color[]);
+void drawLine(int p1[], int p2[], int color[]);
+void drawCurve(int p1[], int p2[], int p3[], int p4[], int color[]);
+void drawCircle(int p1[], int radius, int color[]);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 512;
+const unsigned int SCR_HEIGHT = 512;
 
 const char* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
 "void main()\n"
 "{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"   gl_PointSize = 30.0;\n"
+"   gl_Position = vec4(aPos.x, aPos.y, 0.0f, 0.0f);\n"
 "}\0";
+//const char* vertexShaderSource = "#version 330 core\n"
+//"layout (location = 0) in vec3 aPos;\n"
+//"uniform mat4 proj;\n"
+//"void main()\n"
+//"{\n"
+//"   gl_PointSize = 30.0;\n"
+//"   gl_Position = proj * vec4(aPos.x, aPos.y, 0.0f, 0.0f);\n"
+//"}\0";
 const char* fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
 "void main()\n"
 "{\n"
-"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"   FragColor = vec4(0.1f, 0.1f, 0.2f, 1.0f);\n"
 "}\n\0";
 
 int main()
@@ -236,9 +71,9 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-#ifdef __APPLE__
+//#ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
+//#endif
 
     // glfw window creation
     // --------------------
@@ -249,8 +84,15 @@ int main()
         glfwTerminate();
         return -1;
     }
+    
     glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    gladLoadGL();
+    framebuffer_size_callback(window, SCR_WIDTH, SCR_HEIGHT);
+    
+    //glfwGetFramebufferSize(window, &width, &height);
+    
+    glViewport(0,0,SCR_WIDTH,SCR_HEIGHT);
+    //glfwMakeContextCurrent(window);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -300,7 +142,12 @@ int main()
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
-
+    
+    // = glGetUniformLocation(shaderProgram, "proj");
+    //proj = glm::mat4(1.0f);
+    
+    //proj = ortho(0.0f, (float)SCR_WIDTH, (float)SCR_HEIGHT, 0.0f,-0.0f,1.0f)
+    //glUseProgram(shaderProgram);
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     float vertices[] = {
@@ -323,8 +170,8 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -345,6 +192,7 @@ int main()
 
     // render loop
     // -----------
+    glm::mat4 proj = glm::ortho(0.0f, (float)SCR_WIDTH, 0.0f, (float)SCR_HEIGHT, -1.0f, 1.0f);
     while (!glfwWindowShouldClose(window))
     {
         // input
@@ -353,18 +201,37 @@ int main()
 
         // render
         // ------
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         // draw our first triangle
+        //int projLoc = glGetUniformLocation(shaderProgram, "proj");     
         glUseProgram(shaderProgram);
+        //glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        //glDrawArrays(GL_TRIANGLES, 0, 6);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        // glBindVertexArray(0); // no need to unbind it every time 
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        // glBindVertexArray(0); // no need to unbind it every time
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
+        int p1[] = { 50, 100};
+        int color[3] = { 0 };
+        //drawPoint(p1,color);
+        int p2[] = { 10, 100};
+        //drawPoint(p2,color);
+        int p3[] = {0, 60};
+        int p4[] = {30, 80};
+        //drawLine(p3, p4, color);
+        int p5[] =  {0, 0};
+        int p6[] =  {100, 0};
+        int p7[] =  {100, 100};
+        int p8[] =  {0, 100};
+        int p9[] = {256, 256};
+        //drawCurve(p5, p6, p7, p8, color);
+        //drawCircle(p9,256,color);
+        int p10[] = { 0, 0 };
+        //drawPoint(p10,color);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -398,4 +265,3 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     // height will be significantly larger than specified on retina displays.
     glViewport(0, 0, width, height);
 }
-#endif
