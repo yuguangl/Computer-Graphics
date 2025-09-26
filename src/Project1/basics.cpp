@@ -20,70 +20,88 @@ constexpr auto dimx = 512u, dimy = 512u;
 
 unsigned char imageBuff[dimx][dimy][3];
 
-#define BEZIER_CONSTANT 0.125
-#define SEGMENTS 20
+#define BEZIER_CONSTANT 0.03
+#define SEGMENTS 30
 
 #define RED 0
 #define GREEN 1
 #define BLUE 2
 
-int myTexture() 
-{
-	memset(imageBuff, 0, sizeof(imageBuff));
-	
-	for (int i = 0; i < dimx; i++)
-		for (int j = 0; j < dimy; j++)
-		{
-			if (((i / 16) % 2) == 0)
-			{
-				if (((j / 16) % 2) == 0) {
-					imageBuff[i][j][RED] = 0;
-					imageBuff[i][j][GREEN] = 0;
-					imageBuff[i][j][BLUE] = 0;
-				}
-			}
-			else {
-				if (((j / 16) % 2) == 1) {
-					imageBuff[i][j][RED] = 0;
-					imageBuff[i][j][GREEN] = 0;
-					imageBuff[i][j][BLUE] = 0;
-				}
-			}
-		}
-
-	return 0;
-}
-
-
-void drawPoint(int p1[], int color[]){
-    GLfloat pos[3];
-    pos[0] = (GLfloat)p1[0]/256.0f - 0.5f;
-    pos[1] = (GLfloat)p1[1]/ 256.0f - 0.5f;
-    pos[2] = 0.0f;
+void drawTringle(int p1[], int p2[], int p3[], int color[]){
+    float c[] = {(float)color[0],(float)color[1],(float)color[2]};
+    
+    float vertices[] = {
+        (float)p1[0], (float)p1[1],(float)p1[2], c[0],c[1],c[2],
+        (float)p2[0], (float)p2[1],(float)p2[2], c[0],c[1],c[2],
+        (float)p3[0], (float)p3[1],(float)p3[2], c[0],c[1],c[2]
+    };
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(0);
+    glBindVertexArray(VAO); 
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    }
+
+
+void drawPoint(int p1[], int color[]){
+    GLfloat v[6];
+    v[0] = p1[0];
+    v[1] = p1[1];
+    v[2] = 0.0f;
+    v[3] = color[0] / 255.0f;
+    v[4] = color[1] / 255.0f;
+    v[5] = color[2] / 255.0f;
+
+    unsigned int VBO, VAO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(v), v, GL_STATIC_DRAW);
 
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
     
     glEnable(GL_PROGRAM_POINT_SIZE);
     glDrawArrays(GL_POINTS,0,1);
+    glBindVertexArray(0);
 }
 
 void drawLine(int p1[], int p2[], int color[]){
     drawPoint(p1, color);
     drawPoint(p2, color);
-    GLfloat vertices[6] = { 0 };
-    vertices[0] = p1[0]/512.0f;
-    vertices[1] = p1[1]/512.0f;
-    vertices[3] = p2[0]/512.0f;
-    vertices[4] = p2[1]/512.0f;
+    GLfloat vertices[12];
+    vertices[0] = p1[0];
+    vertices[1] = p1[1];
+    vertices[2] = 0.0f;
+    vertices[3] = color[0] / 255.0f;
+    vertices[4] = color[1] / 255.0f;
+    vertices[5] = color[2] / 255.0f;
+    vertices[6] = p2[0];
+    vertices[7] = p2[1];
+    vertices[8] = 0.0f;
+    vertices[9] = color[0] / 255.0f;
+    vertices[10] = color[1] / 255.0f;
+    vertices[11] = color[2] / 255.0f;
    
     unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
@@ -97,10 +115,13 @@ void drawLine(int p1[], int p2[], int color[]){
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
     
     glDrawArrays(GL_LINES,0,2);
+    glBindVertexArray(0);
 }
 
 GLfloat basis_1(GLfloat u){
@@ -132,9 +153,9 @@ void drawCurve(int p1[], int p2[], int p3[], int p4[], int color[]){
             p2_[1] = (int)yu;
 
             drawLine(p1_, p2_, color);
-            lxu = xu;
-            lyu = yu;
         }
+        lxu = xu;
+        lyu = yu;
     }
 }
 

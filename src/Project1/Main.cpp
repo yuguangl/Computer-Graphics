@@ -26,7 +26,18 @@
 #pragma warning( disable : 26451 )
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
-#define GLM_
+
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+// settings
+
+unsigned int texture;
+
+// image buffer used by raster drawing basics.cpp
+extern unsigned char imageBuff[512][512][3];
+
+using namespace std;
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -35,6 +46,7 @@ void drawPoint(int p1[], int color[]);
 void drawLine(int p1[], int p2[], int color[]);
 void drawCurve(int p1[], int p2[], int p3[], int p4[], int color[]);
 void drawCircle(int p1[], int radius, int color[]);
+void drawTringle(int p1[], int p2[], int p3[], int color[]);
 
 // settings
 const unsigned int SCR_WIDTH = 512;
@@ -42,24 +54,21 @@ const unsigned int SCR_HEIGHT = 512;
 
 const char* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
+"layout (location = 1) in vec3 aColor;\n"
+"uniform mat4 proj;\n"
+"out vec3 vertexColor;\n"
 "void main()\n"
 "{\n"
-"   gl_PointSize = 30.0;\n"
-"   gl_Position = vec4(aPos.x, aPos.y, 0.0f, 0.0f);\n"
+"   gl_PointSize = 3.0;\n"
+"   vertexColor = aColor;\n"
+"   gl_Position = proj * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
 "}\0";
-//const char* vertexShaderSource = "#version 330 core\n"
-//"layout (location = 0) in vec3 aPos;\n"
-//"uniform mat4 proj;\n"
-//"void main()\n"
-//"{\n"
-//"   gl_PointSize = 30.0;\n"
-//"   gl_Position = proj * vec4(aPos.x, aPos.y, 0.0f, 0.0f);\n"
-//"}\0";
 const char* fragmentShaderSource = "#version 330 core\n"
+"in vec3 vertexColor;\n"
 "out vec4 FragColor;\n"
 "void main()\n"
 "{\n"
-"   FragColor = vec4(0.1f, 0.1f, 0.2f, 1.0f);\n"
+"   FragColor = vec4(vertexColor, 1.0);\n"
 "}\n\0";
 
 int main()
@@ -71,9 +80,9 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-//#ifdef __APPLE__
+#ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-//#endif
+#endif
 
     // glfw window creation
     // --------------------
@@ -84,15 +93,9 @@ int main()
         glfwTerminate();
         return -1;
     }
-    
     glfwMakeContextCurrent(window);
     gladLoadGL();
-    framebuffer_size_callback(window, SCR_WIDTH, SCR_HEIGHT);
-    
-    //glfwGetFramebufferSize(window, &width, &height);
-    
-    glViewport(0,0,SCR_WIDTH,SCR_HEIGHT);
-    //glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -101,7 +104,6 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-
 
     // build and compile our shader program
     // ------------------------------------
@@ -142,57 +144,14 @@ int main()
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
-    
-    // = glGetUniformLocation(shaderProgram, "proj");
-    //proj = glm::mat4(1.0f);
-    
-    //proj = ortho(0.0f, (float)SCR_WIDTH, (float)SCR_HEIGHT, 0.0f,-0.0f,1.0f)
-    //glUseProgram(shaderProgram);
-    // set up vertex data (and buffer(s)) and configure vertex attributes
-    // ------------------------------------------------------------------
-    float vertices[] = {
-         0.5f,  0.5f, 0.0f,  // top right
-         0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
-    };
-    unsigned int indices[] = {  // note that we start from 0!
-        0, 1, 3,  // first Triangle
-        1, 2, 3   // second Triangle
-    };
-    unsigned int VBO, VAO, EBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-    glBindVertexArray(VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    // remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-    // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-    glBindVertexArray(0);
-
-
-    // uncomment this call to draw in wireframe polygons.
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    int projLoc = glGetUniformLocation(shaderProgram, "proj");
+    int colorLoc = glGetUniformLocation(shaderProgram, "color");
+    glm::mat4 proj = glm::mat4(1.0f);
+    proj = glm::ortho(0.0f, (float)SCR_WIDTH, (float)SCR_HEIGHT, 0.0f,-0.0f,1.0f);
 
     // render loop
     // -----------
-    glm::mat4 proj = glm::ortho(0.0f, (float)SCR_WIDTH, 0.0f, (float)SCR_HEIGHT, -1.0f, 1.0f);
     while (!glfwWindowShouldClose(window))
     {
         // input
@@ -201,46 +160,40 @@ int main()
 
         // render
         // ------
-        glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // draw our first triangle
-        //int projLoc = glGetUniformLocation(shaderProgram, "proj");     
         glUseProgram(shaderProgram);
-        //glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-        glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0); // no need to unbind it every time
-
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
-        int p1[] = { 50, 100};
-        int color[3] = { 0 };
-        //drawPoint(p1,color);
-        int p2[] = { 10, 100};
-        //drawPoint(p2,color);
-        int p3[] = {0, 60};
-        int p4[] = {30, 80};
-        //drawLine(p3, p4, color);
-        int p5[] =  {0, 0};
-        int p6[] =  {100, 0};
-        int p7[] =  {100, 100};
-        int p8[] =  {0, 100};
-        int p9[] = {256, 256};
-        //drawCurve(p5, p6, p7, p8, color);
-        //drawCircle(p9,256,color);
-        int p10[] = { 0, 0 };
-        //drawPoint(p10,color);
+        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+        int color1[] = {255, 0, 0};
+        //int p1[] = {1,1};
+        //int p2[] = {510,510};
+        //drawLine(p1, p2, color1);
+        //int color2[] = {0, 0, 255};
+        //int p3[] = {1,510};
+        //int p4[] = {510,1};
+        //drawLine(p3, p4, color2);
+        //int color3[] = {255, 255, 255};
+        //int p5[] = {256, 256};
+        //drawCircle(p5,64,color3);
+        //int color4[] = {0, 255, 0};
+        //int p6[] = {50, 240};
+        //int p7[] = {160,50};
+        //int p8[] = {240, 50};
+        //int p9[] = {320,320};
+        //drawCurve(p6, p7, p8, p9, color4);
+        int c1[] = {100,412,0};
+        int c2[] = {412, 412,0};
+        int c3[] = {256, 200, 0};
+        drawTringle(c1,c2,c3,color1);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
     // optional: de-allocate all resources once they've outlived their purpose:
     // ------------------------------------------------------------------------
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
+    //glDeleteVertexArrays(1, &VAO);
+    //glDeleteBuffers(1, &VBO);
     glDeleteProgram(shaderProgram);
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
