@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yuguang/Projects/G4G_Basic/src/Project1
+CMAKE_SOURCE_DIR = /Users/yuguang/Projects/Computer-Graphics/src/Project1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yuguang/Projects/G4G_Basic/src/Project1
+CMAKE_BINARY_DIR = /Users/yuguang/Projects/Computer-Graphics/src/Project1
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles /Users/yuguang/Projects/G4G_Basic/src/Project1//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles /Users/yuguang/Projects/Computer-Graphics/src/Project1//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -214,197 +214,197 @@ RayTracing.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/RayTracing.cpp.s
 .PHONY : RayTracing.cpp.s
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.o: Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.o: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.o
 
 # target to build an object file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.i: Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.i: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.i
 
 # target to preprocess a source file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.i
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.s: Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.s: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.s
 
 # target to generate assembly for a file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.s
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.o: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.o: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.o
 
 # target to build an object file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.i: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.i: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.i
 
 # target to preprocess a source file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.i
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.s: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.s: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.s
 
 # target to generate assembly for a file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.s
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.o: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.o: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.o
 
 # target to build an object file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.i: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.i: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.i
 
 # target to preprocess a source file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.i
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.s: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.s: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.s
 
 # target to generate assembly for a file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.s
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.o: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.o: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.o
 
 # target to build an object file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.i: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.i: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.i
 
 # target to preprocess a source file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.i
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.s: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.s: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.s
 
 # target to generate assembly for a file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.s
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.o: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.o: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.o
 
 # target to build an object file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.i: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.i: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.i
 
 # target to preprocess a source file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.i
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.s: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.s: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.s
 
 # target to generate assembly for a file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.s
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.o: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.o: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.o
 
 # target to build an object file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.i: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.i: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.i
 
 # target to preprocess a source file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.i
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.s: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.s: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.s
 
 # target to generate assembly for a file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.s
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.o: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.o: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.o
 
 # target to build an object file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.i: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.i: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.i
 
 # target to preprocess a source file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.i
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.s: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.s: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.s
 
 # target to generate assembly for a file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.s
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.o: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.o: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.o
 
 # target to build an object file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.i: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.i: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.i
 
 # target to preprocess a source file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.i
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.i
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.i
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.i
 
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.s: Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.s: Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.s
 
 # target to generate assembly for a file
-Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.s
-.PHONY : Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.s
+Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s
+.PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s
 
 basics.o: basics.cpp.o
 .PHONY : basics.o
@@ -430,30 +430,6 @@ basics.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/basics.cpp.s
 .PHONY : basics.cpp.s
 
-build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.o: build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o
-.PHONY : build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.o
-
-# target to build an object file
-build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o
-.PHONY : build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o
-
-build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.i: build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i
-.PHONY : build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.i
-
-# target to preprocess a source file
-build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i
-.PHONY : build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i
-
-build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.s: build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s
-.PHONY : build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.s
-
-# target to generate assembly for a file
-build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s
-.PHONY : build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -473,36 +449,33 @@ help:
 	@echo "... RayTracing.o"
 	@echo "... RayTracing.i"
 	@echo "... RayTracing.s"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.o"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.i"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.s"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.o"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.i"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.s"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.o"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.i"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.s"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.o"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.i"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.s"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.o"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.i"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.s"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.o"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.i"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.s"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.o"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.i"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.s"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.o"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.i"
-	@echo "... Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.s"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.o"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.i"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.s"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.o"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.i"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.s"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.o"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.i"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.s"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.o"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.i"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.s"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.o"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.i"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.s"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.o"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.i"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.s"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.o"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.i"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.s"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.o"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.i"
+	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.s"
 	@echo "... basics.o"
 	@echo "... basics.i"
 	@echo "... basics.s"
-	@echo "... build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.o"
-	@echo "... build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.i"
-	@echo "... build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.s"
 .PHONY : help
 
 

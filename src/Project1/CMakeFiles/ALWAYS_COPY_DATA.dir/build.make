@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yuguang/Projects/G4G_Basic/src/Project1
+CMAKE_SOURCE_DIR = /Users/yuguang/Projects/Computer-Graphics/src/Project1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yuguang/Projects/G4G_Basic/src/Project1
+CMAKE_BINARY_DIR = /Users/yuguang/Projects/Computer-Graphics/src/Project1
 
 # Utility rule file for ALWAYS_COPY_DATA.
 
@@ -67,7 +67,7 @@ include CMakeFiles/ALWAYS_COPY_DATA.dir/compiler_depend.make
 include CMakeFiles/ALWAYS_COPY_DATA.dir/progress.make
 
 CMakeFiles/ALWAYS_COPY_DATA:
-	/opt/homebrew/bin/cmake -E touch /Users/yuguang/Projects/G4G_Basic/src/Project1/always_copy_data.h
+	/opt/homebrew/bin/cmake -E touch /Users/yuguang/Projects/Computer-Graphics/src/Project1/always_copy_data.h
 
 CMakeFiles/ALWAYS_COPY_DATA.dir/codegen:
 .PHONY : CMakeFiles/ALWAYS_COPY_DATA.dir/codegen
@@ -85,6 +85,6 @@ CMakeFiles/ALWAYS_COPY_DATA.dir/clean:
 .PHONY : CMakeFiles/ALWAYS_COPY_DATA.dir/clean
 
 CMakeFiles/ALWAYS_COPY_DATA.dir/depend:
-	cd /Users/yuguang/Projects/G4G_Basic/src/Project1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuguang/Projects/G4G_Basic/src/Project1 /Users/yuguang/Projects/G4G_Basic/src/Project1 /Users/yuguang/Projects/G4G_Basic/src/Project1 /Users/yuguang/Projects/G4G_Basic/src/Project1 /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/ALWAYS_COPY_DATA.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/yuguang/Projects/Computer-Graphics/src/Project1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuguang/Projects/Computer-Graphics/src/Project1 /Users/yuguang/Projects/Computer-Graphics/src/Project1 /Users/yuguang/Projects/Computer-Graphics/src/Project1 /Users/yuguang/Projects/Computer-Graphics/src/Project1 /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/ALWAYS_COPY_DATA.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/ALWAYS_COPY_DATA.dir/depend
 

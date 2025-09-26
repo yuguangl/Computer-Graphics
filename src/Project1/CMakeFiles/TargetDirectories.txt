@@ -1,4 +1,4 @@
-/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/g4g1.dir
-/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/ALWAYS_COPY_DATA.dir
-/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/edit_cache.dir
-/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/rebuild_cache.dir
+/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/g4g1.dir
+/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/ALWAYS_COPY_DATA.dir
+/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/edit_cache.dir
+/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/rebuild_cache.dir

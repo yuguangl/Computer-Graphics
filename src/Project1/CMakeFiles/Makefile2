@@ -54,10 +54,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yuguang/Projects/G4G_Basic/src/Project1
+CMAKE_SOURCE_DIR = /Users/yuguang/Projects/Computer-Graphics/src/Project1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yuguang/Projects/G4G_Basic/src/Project1
+CMAKE_BINARY_DIR = /Users/yuguang/Projects/Computer-Graphics/src/Project1
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -86,14 +86,14 @@ clean: CMakeFiles/ALWAYS_COPY_DATA.dir/clean
 CMakeFiles/g4g1.dir/all: CMakeFiles/ALWAYS_COPY_DATA.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14 "Built target g4g1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Built target g4g1"
 .PHONY : CMakeFiles/g4g1.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/g4g1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/g4g1.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles 0
 .PHONY : CMakeFiles/g4g1.dir/rule
 
 # Convenience name for target.
@@ -103,7 +103,7 @@ g4g1: CMakeFiles/g4g1.dir/rule
 # codegen rule for target.
 CMakeFiles/g4g1.dir/codegen: CMakeFiles/ALWAYS_COPY_DATA.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14 "Finished codegen for target g4g1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Finished codegen for target g4g1"
 .PHONY : CMakeFiles/g4g1.dir/codegen
 
 # clean rule for target.
@@ -118,14 +118,14 @@ CMakeFiles/g4g1.dir/clean:
 CMakeFiles/ALWAYS_COPY_DATA.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ALWAYS_COPY_DATA.dir/build.make CMakeFiles/ALWAYS_COPY_DATA.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ALWAYS_COPY_DATA.dir/build.make CMakeFiles/ALWAYS_COPY_DATA.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num= "Built target ALWAYS_COPY_DATA"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num= "Built target ALWAYS_COPY_DATA"
 .PHONY : CMakeFiles/ALWAYS_COPY_DATA.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ALWAYS_COPY_DATA.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ALWAYS_COPY_DATA.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles 0
 .PHONY : CMakeFiles/ALWAYS_COPY_DATA.dir/rule
 
 # Convenience name for target.
@@ -135,7 +135,7 @@ ALWAYS_COPY_DATA: CMakeFiles/ALWAYS_COPY_DATA.dir/rule
 # codegen rule for target.
 CMakeFiles/ALWAYS_COPY_DATA.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ALWAYS_COPY_DATA.dir/build.make CMakeFiles/ALWAYS_COPY_DATA.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num= "Finished codegen for target ALWAYS_COPY_DATA"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num= "Finished codegen for target ALWAYS_COPY_DATA"
 .PHONY : CMakeFiles/ALWAYS_COPY_DATA.dir/codegen
 
 # clean rule for target.

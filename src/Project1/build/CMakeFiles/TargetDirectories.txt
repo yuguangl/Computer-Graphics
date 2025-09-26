@@ -1,4 +1,0 @@
-/Users/yuguang/Projects/G4G_Basic/src/Project1/build/CMakeFiles/g4g1.dir
-/Users/yuguang/Projects/G4G_Basic/src/Project1/build/CMakeFiles/ALWAYS_COPY_DATA.dir
-/Users/yuguang/Projects/G4G_Basic/src/Project1/build/CMakeFiles/edit_cache.dir
-/Users/yuguang/Projects/G4G_Basic/src/Project1/build/CMakeFiles/rebuild_cache.dir

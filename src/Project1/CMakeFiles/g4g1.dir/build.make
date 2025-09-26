@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/yuguang/Projects/G4G_Basic/src/Project1
+CMAKE_SOURCE_DIR = /Users/yuguang/Projects/Computer-Graphics/src/Project1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/yuguang/Projects/G4G_Basic/src/Project1
+CMAKE_BINARY_DIR = /Users/yuguang/Projects/Computer-Graphics/src/Project1
 
 # Include any dependencies generated for this target.
 include CMakeFiles/g4g1.dir/depend.make
@@ -72,225 +72,209 @@ include CMakeFiles/g4g1.dir/flags.make
 CMakeFiles/g4g1.dir/codegen:
 .PHONY : CMakeFiles/g4g1.dir/codegen
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o: /Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o -c /Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o: /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o -c /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c > CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.i
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c > CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.i
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.s
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.s
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o: /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.i
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.i
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.s
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.s
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o: /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.i
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.i
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.s
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.s
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o: /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.i
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.i
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.s
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.s
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o: /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.i
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.i
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.s
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.s
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o: /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.i
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.i
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.s
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.s
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o: /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.i
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.i
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.s
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.s
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o: /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o -MF CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o.d -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.i
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp > CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.i
 
-CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.s
+CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp -o CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s
 
 CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o: CMakeFiles/g4g1.dir/flags.make
 CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o: CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp
 CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o -MF CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o.d -o CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o -MF CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o.d -o CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp
 
 CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp > CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp > CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i
 
 CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp -o CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp -o CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s
 
 CMakeFiles/g4g1.dir/Main.cpp.o: CMakeFiles/g4g1.dir/flags.make
 CMakeFiles/g4g1.dir/Main.cpp.o: Main.cpp
 CMakeFiles/g4g1.dir/Main.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/g4g1.dir/Main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Main.cpp.o -MF CMakeFiles/g4g1.dir/Main.cpp.o.d -o CMakeFiles/g4g1.dir/Main.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/Project1/Main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/g4g1.dir/Main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/Main.cpp.o -MF CMakeFiles/g4g1.dir/Main.cpp.o.d -o CMakeFiles/g4g1.dir/Main.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/Main.cpp
 
 CMakeFiles/g4g1.dir/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/Main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/Project1/Main.cpp > CMakeFiles/g4g1.dir/Main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/Project1/Main.cpp > CMakeFiles/g4g1.dir/Main.cpp.i
 
 CMakeFiles/g4g1.dir/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/Main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/Project1/Main.cpp -o CMakeFiles/g4g1.dir/Main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/Main.cpp -o CMakeFiles/g4g1.dir/Main.cpp.s
 
 CMakeFiles/g4g1.dir/RayTracing.cpp.o: CMakeFiles/g4g1.dir/flags.make
 CMakeFiles/g4g1.dir/RayTracing.cpp.o: RayTracing.cpp
 CMakeFiles/g4g1.dir/RayTracing.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/g4g1.dir/RayTracing.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/RayTracing.cpp.o -MF CMakeFiles/g4g1.dir/RayTracing.cpp.o.d -o CMakeFiles/g4g1.dir/RayTracing.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/Project1/RayTracing.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/g4g1.dir/RayTracing.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/RayTracing.cpp.o -MF CMakeFiles/g4g1.dir/RayTracing.cpp.o.d -o CMakeFiles/g4g1.dir/RayTracing.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/RayTracing.cpp
 
 CMakeFiles/g4g1.dir/RayTracing.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/RayTracing.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/Project1/RayTracing.cpp > CMakeFiles/g4g1.dir/RayTracing.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/Project1/RayTracing.cpp > CMakeFiles/g4g1.dir/RayTracing.cpp.i
 
 CMakeFiles/g4g1.dir/RayTracing.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/RayTracing.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/Project1/RayTracing.cpp -o CMakeFiles/g4g1.dir/RayTracing.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/RayTracing.cpp -o CMakeFiles/g4g1.dir/RayTracing.cpp.s
 
 CMakeFiles/g4g1.dir/basics.cpp.o: CMakeFiles/g4g1.dir/flags.make
 CMakeFiles/g4g1.dir/basics.cpp.o: basics.cpp
 CMakeFiles/g4g1.dir/basics.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/g4g1.dir/basics.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/basics.cpp.o -MF CMakeFiles/g4g1.dir/basics.cpp.o.d -o CMakeFiles/g4g1.dir/basics.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/Project1/basics.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/g4g1.dir/basics.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/basics.cpp.o -MF CMakeFiles/g4g1.dir/basics.cpp.o.d -o CMakeFiles/g4g1.dir/basics.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/basics.cpp
 
 CMakeFiles/g4g1.dir/basics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/basics.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/Project1/basics.cpp > CMakeFiles/g4g1.dir/basics.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/Project1/basics.cpp > CMakeFiles/g4g1.dir/basics.cpp.i
 
 CMakeFiles/g4g1.dir/basics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/basics.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/Project1/basics.cpp -o CMakeFiles/g4g1.dir/basics.cpp.s
-
-CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o: CMakeFiles/g4g1.dir/flags.make
-CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o: build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp
-CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o -MF CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o.d -o CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o -c /Users/yuguang/Projects/G4G_Basic/src/Project1/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp
-
-CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/G4G_Basic/src/Project1/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp > CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.i
-
-CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/G4G_Basic/src/Project1/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp -o CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/basics.cpp -o CMakeFiles/g4g1.dir/basics.cpp.s
 
 # Object files for target g4g1
 g4g1_OBJECTS = \
-"CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o" \
-"CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o" \
-"CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o" \
-"CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o" \
-"CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o" \
-"CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o" \
-"CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o" \
-"CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o" \
+"CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o" \
+"CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o" \
+"CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o" \
+"CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o" \
+"CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o" \
+"CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o" \
+"CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o" \
+"CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o" \
 "CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o" \
 "CMakeFiles/g4g1.dir/Main.cpp.o" \
 "CMakeFiles/g4g1.dir/RayTracing.cpp.o" \
-"CMakeFiles/g4g1.dir/basics.cpp.o" \
-"CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o"
+"CMakeFiles/g4g1.dir/basics.cpp.o"
 
 # External object files for target g4g1
 g4g1_EXTERNAL_OBJECTS =
 
-g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/glad.c.o
-g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui.cpp.o
-g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_demo.cpp.o
-g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_draw.cpp.o
-g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_glfw.cpp.o
-g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_impl_opengl3.cpp.o
-g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_tables.cpp.o
-g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/G4G_Basic/src/3rdParty/imgui_widgets.cpp.o
+g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c.o
+g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui.cpp.o
+g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_demo.cpp.o
+g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_draw.cpp.o
+g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp.o
+g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_opengl3.cpp.o
+g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_tables.cpp.o
+g4g1: CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.o
 g4g1: CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o
 g4g1: CMakeFiles/g4g1.dir/Main.cpp.o
 g4g1: CMakeFiles/g4g1.dir/RayTracing.cpp.o
 g4g1: CMakeFiles/g4g1.dir/basics.cpp.o
-g4g1: CMakeFiles/g4g1.dir/build/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o
 g4g1: CMakeFiles/g4g1.dir/build.make
 g4g1: CMakeFiles/g4g1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable g4g1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable g4g1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/g4g1.dir/link.txt --verbose=$(VERBOSE)
-	/opt/homebrew/bin/cmake -E copy_directory /Users/yuguang/Projects/G4G_Basic/src/Project1/../../data /Users/yuguang/Projects/G4G_Basic/src/Project1/data
+	/opt/homebrew/bin/cmake -E copy_directory /Users/yuguang/Projects/Computer-Graphics/src/Project1/../../data /Users/yuguang/Projects/Computer-Graphics/src/Project1/data
 
 # Rule to build all files generated by this target.
 CMakeFiles/g4g1.dir/build: g4g1
@@ -301,6 +285,6 @@ CMakeFiles/g4g1.dir/clean:
 .PHONY : CMakeFiles/g4g1.dir/clean
 
 CMakeFiles/g4g1.dir/depend:
-	cd /Users/yuguang/Projects/G4G_Basic/src/Project1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuguang/Projects/G4G_Basic/src/Project1 /Users/yuguang/Projects/G4G_Basic/src/Project1 /Users/yuguang/Projects/G4G_Basic/src/Project1 /Users/yuguang/Projects/G4G_Basic/src/Project1 /Users/yuguang/Projects/G4G_Basic/src/Project1/CMakeFiles/g4g1.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/yuguang/Projects/Computer-Graphics/src/Project1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/yuguang/Projects/Computer-Graphics/src/Project1 /Users/yuguang/Projects/Computer-Graphics/src/Project1 /Users/yuguang/Projects/Computer-Graphics/src/Project1 /Users/yuguang/Projects/Computer-Graphics/src/Project1 /Users/yuguang/Projects/Computer-Graphics/src/Project1/CMakeFiles/g4g1.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/g4g1.dir/depend
 
