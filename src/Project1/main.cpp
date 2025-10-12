@@ -122,6 +122,7 @@ void BeginSim() {
 	int viewLoc = glGetUniformLocation(shader.shaderID, "view");
 	int projLoc = glGetUniformLocation(shader.shaderID, "proj");
 	int ColorLoc = glGetUniformLocation(shader.shaderID, "color");
+    int lightColorLoc = glGetUniformLocation(shader.shaderID, "lightColor");
 	SizeLoc = glGetUniformLocation(shader.shaderID, "size");
 
 	mat4 model  = glm::mat4(1.0f);
@@ -137,16 +138,19 @@ void BeginSim() {
 	initTime = glfwGetTime();
 	initTime2 = glfwGetTime();
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	shader.useShader();
 
     //defaults
     size = 1.0f;
+    //TODO: turn this into vec for consistency
     GLfloat color[4] = {5.0f, 0.0f, 5.0f, 1.0f};
+    GLfloat lightColor[3] = {1.0f,1.0f,1.0f};
     glUniform1f(SizeLoc,size);
     glUniform4f(ColorLoc, color[0], color[1], color[2], color[3]);
+    glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -221,9 +225,11 @@ void BeginSim() {
         glBindVertexArray(0);
         glBindVertexArray(lVAO);
 
-        glBindBuffer(GL_ARRAY_BUFFER, lVBO);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
+        //glBindBuffer(GL_ARRAY_BUFFER, lVBO);
+        //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+        //glEnableVertexAttribArray(0);
+
+        glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
 
         for(int i = 0; i < 6; i+=2){
             if(i == 0){ glUniform4f(ColorLoc, 0.0f, 0.0f, 255.0f , 1.0f);}
@@ -258,6 +264,7 @@ void BeginSim() {
         }
         ImGui::SliderFloat("Size", &size, 0.1f, 5.0f);
         ImGui::ColorEdit4("Color",color);
+        ImGui::ColorEdit3("lightColor",lightColor);
         ImGui::End();
 
         glUniform1f(SizeLoc,size);
@@ -290,7 +297,7 @@ void BeginSim() {
 
 int main() {
 	//Initialization
-	srand(static_cast <unsigned> (time(0)));
+	//srand(static_cast <unsigned> (time(0)));
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
