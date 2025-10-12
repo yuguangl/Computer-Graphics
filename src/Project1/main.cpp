@@ -143,7 +143,7 @@ void BeginSim() {
 	shader.useShader();
 
     //defaults
-    size = 1.5f;
+    size = 1.0f;
     GLfloat color[4] = {5.0f, 0.0f, 5.0f, 1.0f};
     glUniform1f(SizeLoc,size);
     glUniform4f(ColorLoc, color[0], color[1], color[2], color[3]);
