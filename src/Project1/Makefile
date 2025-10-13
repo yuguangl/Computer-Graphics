@@ -166,30 +166,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s
 .PHONY : CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.s
 
-RayTracing.o: RayTracing.cpp.o
-.PHONY : RayTracing.o
-
-# target to build an object file
-RayTracing.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/RayTracing.cpp.o
-.PHONY : RayTracing.cpp.o
-
-RayTracing.i: RayTracing.cpp.i
-.PHONY : RayTracing.i
-
-# target to preprocess a source file
-RayTracing.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/RayTracing.cpp.i
-.PHONY : RayTracing.cpp.i
-
-RayTracing.s: RayTracing.cpp.s
-.PHONY : RayTracing.s
-
-# target to generate assembly for a file
-RayTracing.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/RayTracing.cpp.s
-.PHONY : RayTracing.cpp.s
-
 Shader.o: Shader.cpp.o
 .PHONY : Shader.o
 
@@ -406,30 +382,6 @@ Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s
 .PHONY : Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.cpp.s
 
-basics.o: basics.cpp.o
-.PHONY : basics.o
-
-# target to build an object file
-basics.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/basics.cpp.o
-.PHONY : basics.cpp.o
-
-basics.i: basics.cpp.i
-.PHONY : basics.i
-
-# target to preprocess a source file
-basics.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/basics.cpp.i
-.PHONY : basics.cpp.i
-
-basics.s: basics.cpp.s
-.PHONY : basics.s
-
-# target to generate assembly for a file
-basics.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/basics.cpp.s
-.PHONY : basics.cpp.s
-
 dodec.o: dodec.cpp.o
 .PHONY : dodec.o
 
@@ -478,6 +430,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+model.o: model.cpp.o
+.PHONY : model.o
+
+# target to build an object file
+model.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/model.cpp.o
+.PHONY : model.cpp.o
+
+model.i: model.cpp.i
+.PHONY : model.i
+
+# target to preprocess a source file
+model.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/model.cpp.i
+.PHONY : model.cpp.i
+
+model.s: model.cpp.s
+.PHONY : model.s
+
+# target to generate assembly for a file
+model.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/model.cpp.s
+.PHONY : model.cpp.s
+
 utils.o: utils.cpp.o
 .PHONY : utils.o
 
@@ -515,9 +491,6 @@ help:
 	@echo "... CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.o"
 	@echo "... CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.i"
 	@echo "... CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.s"
-	@echo "... RayTracing.o"
-	@echo "... RayTracing.i"
-	@echo "... RayTracing.s"
 	@echo "... Shader.o"
 	@echo "... Shader.i"
 	@echo "... Shader.s"
@@ -545,15 +518,15 @@ help:
 	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.o"
 	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.i"
 	@echo "... Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_widgets.s"
-	@echo "... basics.o"
-	@echo "... basics.i"
-	@echo "... basics.s"
 	@echo "... dodec.o"
 	@echo "... dodec.i"
 	@echo "... dodec.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... model.o"
+	@echo "... model.i"
+	@echo "... model.s"
 	@echo "... utils.o"
 	@echo "... utils.i"
 	@echo "... utils.s"

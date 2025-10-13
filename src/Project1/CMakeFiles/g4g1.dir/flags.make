@@ -5,7 +5,7 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/yuguang/Projects/Computer-Graphics/src/Project1/../../includes -I/Users/yuguang/Projects/Computer-Graphics/src/Project1
+C_INCLUDES = -I/Users/yuguang/Projects/Computer-Graphics/src/Project1/../../includes -I/Users/yuguang/Projects/Computer-Graphics/src/Project1 -isystem /opt/homebrew/Cellar/assimp/6.0.2/include
 
 C_FLAGSarm64 =  -arch arm64   -Wno-deprecated-declarations
 
@@ -13,7 +13,7 @@ C_FLAGS =  -arch arm64   -Wno-deprecated-declarations
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/yuguang/Projects/Computer-Graphics/src/Project1/../../includes -I/Users/yuguang/Projects/Computer-Graphics/src/Project1
+CXX_INCLUDES = -I/Users/yuguang/Projects/Computer-Graphics/src/Project1/../../includes -I/Users/yuguang/Projects/Computer-Graphics/src/Project1 -isystem /opt/homebrew/Cellar/assimp/6.0.2/include
 
 CXX_FLAGSarm64 = -std=c++11 -arch arm64   -Wno-deprecated-declarations
 
