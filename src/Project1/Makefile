@@ -430,30 +430,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-model.o: model.cpp.o
-.PHONY : model.o
-
-# target to build an object file
-model.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/model.cpp.o
-.PHONY : model.cpp.o
-
-model.i: model.cpp.i
-.PHONY : model.i
-
-# target to preprocess a source file
-model.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/model.cpp.i
-.PHONY : model.cpp.i
-
-model.s: model.cpp.s
-.PHONY : model.s
-
-# target to generate assembly for a file
-model.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/g4g1.dir/build.make CMakeFiles/g4g1.dir/model.cpp.s
-.PHONY : model.cpp.s
-
 utils.o: utils.cpp.o
 .PHONY : utils.o
 
@@ -524,9 +500,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... model.o"
-	@echo "... model.i"
-	@echo "... model.s"
 	@echo "... utils.o"
 	@echo "... utils.i"
 	@echo "... utils.s"

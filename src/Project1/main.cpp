@@ -116,7 +116,7 @@ void BeginSim() {
 	GLfloat* vertices = new GLfloat[n];
 	GenerateDodec(vertices);
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	int modelLoc = glGetUniformLocation(shader.shaderID, "model");
 	int viewLoc = glGetUniformLocation(shader.shaderID, "view");
 	int projLoc = glGetUniformLocation(shader.shaderID, "proj");
