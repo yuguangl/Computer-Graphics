@@ -10,6 +10,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <algorithm>
+#include <sys/time.h>
 #include <stdlib.h>
 #include <filesystem>
 #include <stb_image.h>
@@ -91,7 +92,8 @@ void BeginSim() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");//TODO: make this get the version from the vertexshader
 
-    int n = 3*7*12;
+    int n = 2*3*7*12;
+    //3 coords * 7 vertices per face (1 repeated) * 12 faces * 2 because each vertex needs a normal
 
     const char* shaderFile[2] = {"VertexShader_2","FragmentShader"};
     //TODO: take in a list of shader files
@@ -113,15 +115,17 @@ void BeginSim() {
 	glfwSwapBuffers(window);
 
 	GLuint VAO, VBO;
-	GLfloat* vertices = new GLfloat[n];
+	GLfloat* vertices = (GLfloat*)calloc(n,sizeof(GLfloat));
+    
 	GenerateDodec(vertices);
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	int modelLoc = glGetUniformLocation(shader.shaderID, "model");
 	int viewLoc = glGetUniformLocation(shader.shaderID, "view");
 	int projLoc = glGetUniformLocation(shader.shaderID, "proj");
 	int ColorLoc = glGetUniformLocation(shader.shaderID, "color");
     int lightColorLoc = glGetUniformLocation(shader.shaderID, "lightColor");
+    int lightPosLoc = glGetUniformLocation(shader.shaderID, "lightPos");
 	SizeLoc = glGetUniformLocation(shader.shaderID, "size");
 
 	mat4 model  = glm::mat4(1.0f);
@@ -145,11 +149,13 @@ void BeginSim() {
     //defaults
     size = 1.0f;
     //TODO: turn this into vec for consistency
-    GLfloat color[4] = {5.0f, 0.0f, 5.0f, 1.0f};
+    GLfloat color[3] = {0.147,0.0, 1.0};
     GLfloat lightColor[3] = {1.0f,1.0f,1.0f};
+    GLfloat lightPos[3] = {1.0f,-150.0f,150.0f};
     glUniform1f(SizeLoc,size);
-    glUniform4f(ColorLoc, color[0], color[1], color[2], color[3]);
+    glUniform3f(ColorLoc, color[0], color[1], color[2]);
     glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
+    glUniform3f(lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -157,42 +163,61 @@ void BeginSim() {
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, n * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
     glBindBuffer(GL_ARRAY_BUFFER,0);
-    glBindVertexArray(0);
+    glBindVertexArray(1);
 
-    GLuint lVAO, lVBO;
-    
-    float axis[18] = {
-        WIDTH/2.0f,HEIGHT/4.0f,0.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f,//Y
-        WIDTH/4.0f,HEIGHT/2.0f,0.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f,//X
-        WIDTH/2.0f,HEIGHT/2.0f,200.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f//Z
-    };
+    //GLuint lVAO, lVBO;
+    //
+    //float axis[18] = {
+    //    WIDTH/2.0f,HEIGHT/4.0f,0.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f,//Y
+    //    WIDTH/4.0f,HEIGHT/2.0f,0.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f,//X
+    //    WIDTH/2.0f,HEIGHT/2.0f,200.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f//Z
+    //};
 
-    //might just be making this confusing but this translates to world coordinates (0,0,0) center
-    //omg this code is a mess
+    ////might just be making this confusing but this translates to world coordinates (0,0,0) center
+    ////omg this code is a mess
 
-    for(int i = 0; i < 18; i++){
-        if((i+1) % 3 != 0){
-            axis[i] -= WIDTH/2.0;
-        }
-        axis[i] /= 2.0;
-    }
-    glGenVertexArrays(1, &lVAO);
-    glBindVertexArray(lVAO);
-    glGenBuffers(1, &lVBO);
+    //for(int i = 0; i < 18; i++){
+    //    if((i+1) % 3 != 0){
+    //        axis[i] -= WIDTH/2.0;
+    //    }
+    //    axis[i] /= 2.0;
+    //}
+    //glGenVertexArrays(1, &lVAO);
+    //glBindVertexArray(lVAO);
+    //glGenBuffers(1, &lVBO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, lVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(axis), axis, GL_STATIC_DRAW);
+    //glBindBuffer(GL_ARRAY_BUFFER, lVBO);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(axis), axis, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    glBindVertexArray(0);
+    //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    //glEnableVertexAttribArray(0);
+    //glBindVertexArray(0);
+    glEnable(GL_DEPTH_TEST);
+    //glDepthFunc(GL_ALWAYS);
+    ////glEnable(GL_CULL_FACE);
+    ////glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
+    //glDepthMask(GL_TRUE);
+    //glDisable(GL_CULL_FACE);
 
 
     bool wireframe = false;
+    int angle = 0;
+    int r = RADIUS * 2;
+
+    struct timeval stop, start;
+    gettimeofday(&start, NULL);
+    //do stuff
+
 	while (!glfwWindowShouldClose(window)) {
+        gettimeofday(&stop, NULL);
+        double t = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec) / 1000000.0;
+        cout << t << endl;
+        
         if(!io.WantCaptureKeyboard){
             processInput(window);
         }
@@ -204,6 +229,7 @@ void BeginSim() {
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
 
         //glBindVertexArray(VAO);
 
@@ -211,31 +237,34 @@ void BeginSim() {
 
         //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
         //glEnableVertexAttribArray(0);
+        //glBindVertexArray(0);
+        //glBindVertexArray(1);
         glBindVertexArray(VAO);
         //NOTE: 7 because 7 vertices: 1 center + 5 points + 1 repeat to complete the last triangle
         glEnable(GL_PROGRAM_POINT_SIZE);
-        //glDrawArrays(GL_POINTS, 0,60);
         //glDrawArrays(GL_TRIANGLE_STRIP, 0,8);
+        //glDrawArrays(GL_TRIANGLE_FAN, 0, 7);
+        
         for(int i = 0; i < 7*12;i+=7){
             glDrawArrays(GL_TRIANGLE_FAN, i, 7);
         } 
         model  = glm::mat4(1.0f);
 
-        glBindVertexArray(0);
-        glBindVertexArray(lVAO);
+        //glBindVertexArray(0);
+        //glBindVertexArray(lVAO);
 
-        //glBindBuffer(GL_ARRAY_BUFFER, lVBO);
-        //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        //glEnableVertexAttribArray(0);
+        ////glBindBuffer(GL_ARRAY_BUFFER, lVBO);
+        ////glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+        ////glEnableVertexAttribArray(0);
 
-        glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
+        //glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
 
-        for(int i = 0; i < 6; i+=2){
-            if(i == 0){ glUniform4f(ColorLoc, 0.0f, 0.0f, 255.0f , 1.0f);}
-            if(i == 2){ glUniform4f(ColorLoc, 255.0f, 0.0f, 0.0f , 1.0f);}
-            if(i == 4){ glUniform4f(ColorLoc, 0.0f, 255.0f, 0.0f , 1.0f);}
-            glDrawArrays(GL_LINES,i,2);
-        }
+        //for(int i = 0; i < 6; i+=2){
+        //    if(i == 0){ glUniform4f(ColorLoc, 0.0f, 0.0f, 255.0f , 1.0f);}
+        //    if(i == 2){ glUniform4f(ColorLoc, 255.0f, 0.0f, 0.0f , 1.0f);}
+        //    if(i == 4){ glUniform4f(ColorLoc, 0.0f, 255.0f, 0.0f , 1.0f);}
+        //    glDrawArrays(GL_LINES,i,2);
+        //}
         ImGui::Begin("this dodecagon was hard to make");
         if(ImGui::Button("save shaders")){
             for(int i = 0; i < 2; i++){
@@ -253,10 +282,13 @@ void BeginSim() {
             viewLoc = glGetUniformLocation(shader.shaderID, "view");
             projLoc = glGetUniformLocation(shader.shaderID, "proj");
             ColorLoc = glGetUniformLocation(shader.shaderID, "color");
+            lightColorLoc = glGetUniformLocation(shader.shaderID, "lightColor");
+            lightPosLoc = glGetUniformLocation(shader.shaderID, "lightPos");
             SizeLoc = glGetUniformLocation(shader.shaderID, "size");
+            glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
+            glUniform3f(lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
 
-
-           //shader.useShader();
+            shader.useShader();
         }
         for(int i = 0; i < 2; i++){
             ImGui::InputTextMultiline(shaderFile[i],newShaderContents[i], 1024, ImVec2(500,300));
@@ -267,7 +299,7 @@ void BeginSim() {
         ImGui::End();
 
         glUniform1f(SizeLoc,size);
-        glUniform4f(ColorLoc, color[0], color[1], color[2], color[3]);
+        glUniform3f(ColorLoc, color[0], color[1], color[2]);
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -282,7 +314,7 @@ void BeginSim() {
         }
     }
 	glDeleteVertexArrays(1, &VAO);
-	glDeleteVertexArrays(1, &lVAO);
+	//glDeleteVertexArrays(1, &lVAO);
 	glDeleteBuffers(1, &VBO);
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();

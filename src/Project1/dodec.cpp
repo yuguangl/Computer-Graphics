@@ -10,29 +10,21 @@
 #define RADIUS 100 
 void GeneratePentagon(GLfloat*& vertices, int offset, GLfloat face_offset) {
     int pos = offset;
-    vertices[pos] = 0.0;
-    vertices[pos+1] = 0.0;
     vertices[pos+2] = face_offset;
+    pos += 6;
     GLfloat degreeIncrement = glm::radians((float)((360.0f / 5.0f)));
     int c = 0;
-    pos += 2;
-    while (pos < 18+offset) {
+    while (pos < 42+offset) {
         GLfloat currentDegree = c * degreeIncrement - glm::radians(18.0);
         if(face_offset > 0){
             currentDegree += glm::radians(180.0);
         }
-        //cout << currentDegree << " << " << endl;
-        vertices[++pos] = (GLfloat)(RADIUS * cos(currentDegree));
-        //cout << "x pos value " << pos << " " << vertices[pos] << endl; 
-        vertices[++pos] = (GLfloat)(RADIUS * sin(currentDegree));
-        //cout << "y pos value " << pos << " " << vertices[pos] << endl; 
-        //vertices[pos] = (GLfloat)0.0;
-        //vertices[pos] = (GLfloat)(RADIUS * sin(currentDegree));
-        vertices[++pos] = vertices[offset+2];
-        //cout << "z pos value " << pos << " " << vertices[pos] << endl; 
+        vertices[pos++] = (GLfloat)(RADIUS * cos(currentDegree));
+        vertices[pos++] = (GLfloat)(RADIUS * sin(currentDegree));
+        vertices[pos++] = vertices[offset+2];
+        pos += 3;
         c++;
     }
-    //cout << "a" << endl;
 }
 
 vec3 GetNormalizedSideVector(GLfloat*& vertices, int p1, int p2){
@@ -42,7 +34,8 @@ vec3 GetNormalizedSideVector(GLfloat*& vertices, int p1, int p2){
 
 void RotateNewPentagon(GLfloat*& vertices, int offset, int start_offset,  vec3 axis , vec3 p0){
     GLfloat angle = glm::radians(116.56505);
-    for(int i = 0; i < 21; i+=3){
+    cout << "offset: " << offset <<endl;
+    for(int i = 0; i < 42; i+=6){
         vec3 p1 = vec3(vertices[start_offset+i], vertices[start_offset+i+1], vertices[start_offset +i+2]);
         vec3 r = (p1 - p0); 
         //rotation matrix operation that i dont really understand
@@ -54,6 +47,51 @@ void RotateNewPentagon(GLfloat*& vertices, int offset, int start_offset,  vec3 a
         vertices[offset+i+2] = rotation.z;
         }
     }
+//TODO: get rid of magic numbers man
+void CalcFaceNormals(GLfloat*& vertices){
+    int offset = 42;
+    int vsize = 6;
+    for(int i = 0; i < vsize * 7 *12; i+=offset){
+        vec3 A = vec3(vertices[i], vertices[i+1], vertices[i+2]);
+        vec3 B = vec3(vertices[vsize+i], vertices[vsize+i+1], vertices[vsize+i+2]);
+        vec3 C = vec3(vertices[vsize*2+i], vertices[vsize*2+i+1], vertices[vsize*2+i+2]);
+        vec3 A_B = B - A;
+        vec3 A_C = C - A;
+        vec3 face_normal = glm::normalize(glm::cross(A_B, A_C));
+        if(glm::dot(face_normal, A) > 0 ){
+            for(int j = i;j < i+offset; j+=vsize){
+                vertices[j+3] = face_normal.x;
+                vertices[j+4] = face_normal.y;
+                vertices[j+5] = face_normal.z;
+            }
+        }else{
+            for(int j = i;j < i+offset; j+=vsize){
+                vertices[j+3] = -face_normal.x;
+                vertices[j+4] = -face_normal.y;
+                vertices[j+5] = -face_normal.z;
+            }
+        }
+
+        //if(i < vsize * 7*12 / 2){
+        //}
+        //if(i > vsize * 7*12 / 2){
+        //    for(int j = i;j < i+offset; j+=vsize){
+        //        vertices[j+3] = -face_normal.x;
+        //        vertices[j+4] = -face_normal.y;
+        //        vertices[j+5] = -face_normal.z;
+        //    }
+        //}
+    }
+    //for(int i = 0; i < vsize * 7 * 12; i += 6){
+    //        vertices[i+3] = 0.0;
+    //        vertices[i+4] = 0.0;
+    //        vertices[i+5] = 1.0;
+    //}
+
+}
+
+       
+
 
 void GenerateDodec(GLfloat*& vertices){
     GLfloat phi = (1.0 + sqrt(5))/ 2.0;
@@ -61,53 +99,35 @@ void GenerateDodec(GLfloat*& vertices){
     vec2 p2 = vec2(RADIUS*cos(glm::radians(72.0)), RADIUS*sin(glm::radians(72.0)));
     float side = GetDistance(p1,p2);
     GLfloat inradius = (pow(phi,3))/(2 * sqrt(pow(phi,2)+1)) * side;
-    int offset = 21;
+    int offset = 42;
     //generatepentagon(vertices, 0);
     GeneratePentagon(vertices,0,-inradius);
     //yo this vertex managment is so dogshit
-    
-    vec3 axis = GetNormalizedSideVector(vertices,3,6);
-    vec3 p0 = vec3(vertices[3], vertices[4], vertices[5]);
-    RotateNewPentagon(vertices, offset * 1, 0,axis, p0);
-
-    axis = GetNormalizedSideVector(vertices, 6,9);//vertex num on the original generated pentagon
-    p0 = vec3(vertices[9], vertices[10], vertices[11]);
-    RotateNewPentagon(vertices, offset * 2, 0, axis, p0);
-
-    axis = GetNormalizedSideVector(vertices, 9,12);
-    p0 = vec3(vertices[9], vertices[10], vertices[11]);
-    RotateNewPentagon(vertices, offset * 3, 0, axis, p0);
-
-    axis = GetNormalizedSideVector(vertices, 12,15);
-    p0 = vec3(vertices[12], vertices[13], vertices[14]);
-    RotateNewPentagon(vertices, offset * 4, 0, axis, p0);
-
-    axis = GetNormalizedSideVector(vertices, 15,18);
-    p0 = vec3(vertices[15], vertices[16], vertices[17]);
-    RotateNewPentagon(vertices, offset * 5, 0, axis, p0);
-
+    int v1,v2;
+    for(int i = 0; i < 5; i++){
+        int v1 = i * 6 + 6;
+        int v2 = i * 6 + 12;
+        vec3 axis = GetNormalizedSideVector(vertices,v1,v2);
+        vec3 p0 = vec3(vertices[v1], vertices[v1+1], vertices[v1+2]);
+        RotateNewPentagon(vertices, offset * (i+1), 0,axis, p0);
+    }
     GeneratePentagon(vertices,offset*6,inradius);
-    
+
     int p = offset * 6;
-    axis = GetNormalizedSideVector(vertices,p+6,p+3);
-    p0 = vec3(vertices[p+3], vertices[p+4], vertices[p+5]);
-    RotateNewPentagon(vertices, offset * 7, p, axis, p0);
+    for(int i = 0; i < 5; i++){
+        int v1 = i * 6 + 6 + p;
+        int v2 = i * 6 + 12 + p;
+        vec3 axis = GetNormalizedSideVector(vertices,v2,v1);
+        vec3 p0 = vec3(vertices[v1], vertices[v1+1], vertices[v1+2]);
+        RotateNewPentagon(vertices, offset * (i + 7), p, axis, p0);
+    }
+    CalcFaceNormals(vertices);
+    for(int i = 0; i < 6*7*12; i++){
+        if(i%6 == 0){
+            printf("\n");
+          }
+        printf("%f ",vertices[i]);
+      }
 
-    axis = GetNormalizedSideVector(vertices,p+9,p+6);
-    p0 = vec3(vertices[p+6], vertices[p+7], vertices[p+8]);
-    RotateNewPentagon(vertices, offset * 8, p, axis, p0);
-
-    axis = GetNormalizedSideVector(vertices,p+12,p+9);
-    p0 = vec3(vertices[p+9], vertices[p+10], vertices[p+11]);
-    RotateNewPentagon(vertices, offset * 9, p, axis, p0);
-
-    axis = GetNormalizedSideVector(vertices,p+15,p+12);
-    p0 = vec3(vertices[p+12], vertices[p+13], vertices[p+14]);
-    RotateNewPentagon(vertices, offset * 10, p, axis, p0);
-
-    axis = GetNormalizedSideVector(vertices,p+18,p+15);
-    p0 = vec3(vertices[p+15], vertices[p+16], vertices[p+17]);
-    RotateNewPentagon(vertices, offset * 11, p, axis, p0);
-  
 }
 
