@@ -52,12 +52,14 @@ void CalcFaceNormals(GLfloat*& vertices){
     int offset = 42;
     int vsize = 6;
     for(int i = 0; i < vsize * 7 *12; i+=offset){
+        //get normal of the face
         vec3 A = vec3(vertices[i], vertices[i+1], vertices[i+2]);
         vec3 B = vec3(vertices[vsize+i], vertices[vsize+i+1], vertices[vsize+i+2]);
         vec3 C = vec3(vertices[vsize*2+i], vertices[vsize*2+i+1], vertices[vsize*2+i+2]);
         vec3 A_B = B - A;
         vec3 A_C = C - A;
         vec3 face_normal = glm::normalize(glm::cross(A_B, A_C));
+        //if the normal is pointing in the wrong direction, negate it
         if(glm::dot(face_normal, A) > 0 ){
             for(int j = i;j < i+offset; j+=vsize){
                 vertices[j+3] = face_normal.x;
@@ -71,27 +73,8 @@ void CalcFaceNormals(GLfloat*& vertices){
                 vertices[j+5] = -face_normal.z;
             }
         }
-
-        //if(i < vsize * 7*12 / 2){
-        //}
-        //if(i > vsize * 7*12 / 2){
-        //    for(int j = i;j < i+offset; j+=vsize){
-        //        vertices[j+3] = -face_normal.x;
-        //        vertices[j+4] = -face_normal.y;
-        //        vertices[j+5] = -face_normal.z;
-        //    }
-        //}
     }
-    //for(int i = 0; i < vsize * 7 * 12; i += 6){
-    //        vertices[i+3] = 0.0;
-    //        vertices[i+4] = 0.0;
-    //        vertices[i+5] = 1.0;
-    //}
-
 }
-
-       
-
 
 void GenerateDodec(GLfloat*& vertices){
     GLfloat phi = (1.0 + sqrt(5))/ 2.0;

@@ -170,39 +170,7 @@ void BeginSim() {
     glBindBuffer(GL_ARRAY_BUFFER,0);
     glBindVertexArray(1);
 
-    //GLuint lVAO, lVBO;
-    //
-    //float axis[18] = {
-    //    WIDTH/2.0f,HEIGHT/4.0f,0.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f,//Y
-    //    WIDTH/4.0f,HEIGHT/2.0f,0.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f,//X
-    //    WIDTH/2.0f,HEIGHT/2.0f,200.0f,WIDTH/2.0f,HEIGHT/2.0f,0.0f//Z
-    //};
-
-    ////might just be making this confusing but this translates to world coordinates (0,0,0) center
-    ////omg this code is a mess
-
-    //for(int i = 0; i < 18; i++){
-    //    if((i+1) % 3 != 0){
-    //        axis[i] -= WIDTH/2.0;
-    //    }
-    //    axis[i] /= 2.0;
-    //}
-    //glGenVertexArrays(1, &lVAO);
-    //glBindVertexArray(lVAO);
-    //glGenBuffers(1, &lVBO);
-
-    //glBindBuffer(GL_ARRAY_BUFFER, lVBO);
-    //glBufferData(GL_ARRAY_BUFFER, sizeof(axis), axis, GL_STATIC_DRAW);
-
-    //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    //glEnableVertexAttribArray(0);
-    //glBindVertexArray(0);
     glEnable(GL_DEPTH_TEST);
-    //glDepthFunc(GL_ALWAYS);
-    ////glEnable(GL_CULL_FACE);
-    ////glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
-    //glDepthMask(GL_TRUE);
-    //glDisable(GL_CULL_FACE);
 
 
     bool wireframe = false;
@@ -216,7 +184,6 @@ void BeginSim() {
 	while (!glfwWindowShouldClose(window)) {
         gettimeofday(&stop, NULL);
         double t = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec) / 1000000.0;
-        cout << t << endl;
         
         if(!io.WantCaptureKeyboard){
             processInput(window);
@@ -250,21 +217,6 @@ void BeginSim() {
         } 
         model  = glm::mat4(1.0f);
 
-        //glBindVertexArray(0);
-        //glBindVertexArray(lVAO);
-
-        ////glBindBuffer(GL_ARRAY_BUFFER, lVBO);
-        ////glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        ////glEnableVertexAttribArray(0);
-
-        //glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
-
-        //for(int i = 0; i < 6; i+=2){
-        //    if(i == 0){ glUniform4f(ColorLoc, 0.0f, 0.0f, 255.0f , 1.0f);}
-        //    if(i == 2){ glUniform4f(ColorLoc, 255.0f, 0.0f, 0.0f , 1.0f);}
-        //    if(i == 4){ glUniform4f(ColorLoc, 0.0f, 255.0f, 0.0f , 1.0f);}
-        //    glDrawArrays(GL_LINES,i,2);
-        //}
         ImGui::Begin("this dodecagon was hard to make");
         if(ImGui::Button("save shaders")){
             for(int i = 0; i < 2; i++){
@@ -314,12 +266,10 @@ void BeginSim() {
         }
     }
 	glDeleteVertexArrays(1, &VAO);
-	//glDeleteVertexArrays(1, &lVAO);
 	glDeleteBuffers(1, &VBO);
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
-	//glDeleteBuffers(1, &EBO);
 	shader.Delete();
 	glfwDestroyWindow(window);
 	glfwTerminate();
