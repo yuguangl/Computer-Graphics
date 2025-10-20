@@ -22,6 +22,7 @@
 #include "dodec.h"
 #include "Shader.h"
 #include "utils.h"
+#include "model.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #define STB_IMAGE_IMPLEMENTATION
@@ -98,6 +99,8 @@ void BeginSim() {
     const char* shaderFile[2] = {"VertexShader_2","FragmentShader"};
     //TODO: take in a list of shader files
 	Shader shader("VertexShader_2", "FragmentShader");
+    Model fishModel("data/fish.obj");
+    fishModel.directory ="data/abstract-geometric-pattern-background_1319-242.jpg";
     //TODO: organize this shit
 
     FILE* fp = NULL;
@@ -117,7 +120,7 @@ void BeginSim() {
 	GLuint VAO, VBO;
 	GLfloat* vertices = (GLfloat*)calloc(n,sizeof(GLfloat));
     
-	GenerateDodec(vertices);
+	//GenerateDodec(vertices);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	int modelLoc = glGetUniformLocation(shader.shaderID, "model");
@@ -198,24 +201,17 @@ void BeginSim() {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
 
-        //glBindVertexArray(VAO);
-
-        //glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-        //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        //glEnableVertexAttribArray(0);
-        //glBindVertexArray(0);
-        //glBindVertexArray(1);
         glBindVertexArray(VAO);
         //NOTE: 7 because 7 vertices: 1 center + 5 points + 1 repeat to complete the last triangle
         glEnable(GL_PROGRAM_POINT_SIZE);
         //glDrawArrays(GL_TRIANGLE_STRIP, 0,8);
         //glDrawArrays(GL_TRIANGLE_FAN, 0, 7);
         
-        for(int i = 0; i < 7*12;i+=7){
-            glDrawArrays(GL_TRIANGLE_FAN, i, 7);
-        } 
+        //for(int i = 0; i < 7*12;i+=7){
+        //    glDrawArrays(GL_TRIANGLE_FAN, i, 7);
+        //} 
         model  = glm::mat4(1.0f);
+        fishModel.Draw(shader);
 
         ImGui::Begin("this dodecagon was hard to make");
         if(ImGui::Button("save shaders")){
@@ -245,7 +241,8 @@ void BeginSim() {
         for(int i = 0; i < 2; i++){
             ImGui::InputTextMultiline(shaderFile[i],newShaderContents[i], 1024, ImVec2(500,300));
         }
-        ImGui::SliderFloat("Size", &size, 0.1f, 5.0f);
+        //ImGui::SliderFloat("Size", &size, 0.1f, 5.0f);
+        ImGui::SliderFloat("Size", &size, 0.1f, 50.0f);
         ImGui::ColorEdit4("Color",color);
         ImGui::ColorEdit3("lightColor",lightColor);
         ImGui::End();
