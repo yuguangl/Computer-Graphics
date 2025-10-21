@@ -30,8 +30,10 @@
 mat4 view_ = glm::mat4(1.0f);
 float L  = -WIDTH/(2 *(tan( 22.5f * 3.1415926535/180 ))); //why am i using float not GLfloat too lazy to change
 int SizeLoc;
+int old_SizeLoc;
 float size; 
 float default_size = 50.0;
+bool toggle = true;
 
 
 bool processInput(GLFWwindow* window) {
@@ -61,6 +63,9 @@ bool processInput(GLFWwindow* window) {
      }
      if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS){
         view_ = glm::translate(view_, glm::vec3(0.0f,-1.0f, 0.0f));
+     }
+     if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS){
+        toggle = !toggle;
      }
 
      if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
@@ -103,6 +108,7 @@ void BeginSim() {
     const char* shaderFile[2] = {"VertexShader_2","FragmentShader"};
     //TODO: take in a list of shader files
 	Shader shader("VertexShader_2", "FragmentShader");
+	Shader old_shader("VertexShader_2", "Old_FragmentShader");
     Model fishModel("data/fish.obj");
 
     //TODO: organize this shit
@@ -124,7 +130,7 @@ void BeginSim() {
 	GLuint VAO, VBO;
 	GLfloat* vertices = (GLfloat*)calloc(n,sizeof(GLfloat));
     
-	//GenerateDodec(vertices);
+	GenerateDodec(vertices);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	int modelLoc = glGetUniformLocation(shader.shaderID, "model");
@@ -136,16 +142,16 @@ void BeginSim() {
 	SizeLoc = glGetUniformLocation(shader.shaderID, "size");
 
 	mat4 model  = glm::mat4(1.0f);
-    //model = glm::translate(model, vec3(100.0f,100.0f,100.0f));
-
-	//mat4 proj  = glm::mat4(1.0f);
-    //model = glm::rotate(model, glm::radians(-54.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    //view_ = glm::translate(view_, glm::vec3(-WIDTH/2,-HEIGHT/2,-WIDTH/( 2 *L)));
     view_ = glm::translate(view_, glm::vec3(0.0f,0.0f, L));
-    //view_ = glm::translate(view_, glm::vec3(0.0f,0.0f,-3000.0));
-    //mat4 proj = ortho(0.0f, (float)WIDTH, (float)HEIGHT, 0.0f,-1.0f, 100.0f);
 	mat4 proj = glm::perspective(glm::radians(-45.0f), -(float)width/(float)height,0.1f,5000.0f);
    
+	int old_modelLoc = glGetUniformLocation(old_shader.shaderID, "model");
+	int old_viewLoc = glGetUniformLocation(old_shader.shaderID, "view");
+	int old_projLoc = glGetUniformLocation(old_shader.shaderID, "proj");
+	int old_ColorLoc = glGetUniformLocation(old_shader.shaderID, "color");
+    int old_lightColorLoc = glGetUniformLocation(old_shader.shaderID, "lightColor");
+    int old_lightPosLoc = glGetUniformLocation(old_shader.shaderID, "lightPos");
+	old_SizeLoc = glGetUniformLocation(old_shader.shaderID, "size");
 
 	initTime = glfwGetTime();
 	initTime2 = glfwGetTime();
@@ -165,6 +171,12 @@ void BeginSim() {
     glUniform3f(ColorLoc, color[0], color[1], color[2]);
     glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
     glUniform3f(lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
+    old_shader.useShader();
+
+    glUniform1f(old_SizeLoc,size);
+    glUniform3f(old_ColorLoc, color[0], color[1], color[2]);
+    glUniform3f(old_lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
+    glUniform3f(old_lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -190,6 +202,7 @@ void BeginSim() {
     gettimeofday(&start, NULL);
     //do stuff
 
+    mat4 model_2 = glm::mat4(1.0f);
 	while (!glfwWindowShouldClose(window)) {
         gettimeofday(&stop, NULL);
         double t = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec) / 1000000.0;
@@ -202,24 +215,44 @@ void BeginSim() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        model = glm::translate(model, glm::vec3(cos(t), 0.0f, sin(t)));
-        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
-        glUniform3f(lightPosLoc, r * cos(t), r * sin(t), r * sin(t));
-
+        model = glm::mat4(1.0f);
+//        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+//        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
+//        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+//        //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
+//        glUniform3f(lightPosLoc, r * cos(t), r * sin(t), r * sin(t));
+//
         glBindVertexArray(VAO);
         //NOTE: 7 because 7 vertices: 1 center + 5 points + 1 repeat to complete the last triangle
         glEnable(GL_PROGRAM_POINT_SIZE);
         //glDrawArrays(GL_TRIANGLE_STRIP, 0,8);
         //glDrawArrays(GL_TRIANGLE_FAN, 0, 7);
         
-        //for(int i = 0; i < 7*12;i+=7){
-        //    glDrawArrays(GL_TRIANGLE_FAN, i, 7);
-        //} 
-        //model  = glm::mat4(1.0f);
-        fishModel.Draw(shader);
+        if(toggle){
+            old_shader.useShader();
+            model = glm::mat4(1.0f);
+            glUniformMatrix4fv(old_projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+            glUniformMatrix4fv(old_viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
+            glUniformMatrix4fv(old_modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
+            glUniform3f(old_lightPosLoc, r * cos(t), r * sin(t), r * sin(t));
+            for(int i = 0; i < 7*12;i+=7){
+                glDrawArrays(GL_TRIANGLE_FAN, i, 7);
+            } 
+        }else{
+            model = glm::mat4(1.0f);
+            glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
+            glUniform3f(lightPosLoc, r * cos(t), r * sin(t), r * sin(t));
+
+            shader.useShader();
+
+            model_2 = glm::translate(model_2, glm::vec3(cos(t), 0.0f, sin(t)));
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model_2));
+            fishModel.Draw(shader);
+        }
 
         ImGui::Begin("this dodecagon was hard to make");
         if(ImGui::Button("save shaders")){
@@ -257,6 +290,9 @@ void BeginSim() {
 
         glUniform1f(SizeLoc,size);
         glUniform3f(ColorLoc, color[0], color[1], color[2]);
+
+        glUniform1f(old_SizeLoc,size);
+        glUniform3f(old_ColorLoc, color[0], color[1], color[2]);
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

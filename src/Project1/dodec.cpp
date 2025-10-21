@@ -7,7 +7,7 @@
 #include "utils.h"
 
 
-#define RADIUS 100 
+#define RADIUS 1
 void GeneratePentagon(GLfloat*& vertices, int offset, GLfloat face_offset) {
     int pos = offset;
     vertices[pos+2] = face_offset;
