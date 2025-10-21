@@ -31,6 +31,7 @@ mat4 view_ = glm::mat4(1.0f);
 float L  = -WIDTH/(2 *(tan( 22.5f * 3.1415926535/180 ))); //why am i using float not GLfloat too lazy to change
 int SizeLoc;
 float size; 
+float default_size = 50.0;
 
 
 bool processInput(GLFWwindow* window) {
@@ -58,11 +59,14 @@ bool processInput(GLFWwindow* window) {
      if(glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS){
         view_ = glm::rotate(view_,(float)glm::radians(-1.0), glm::vec3(0.0f, 0.0f, 1.0f));  
      }
+     if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS){
+        view_ = glm::translate(view_, glm::vec3(0.0f,-1.0f, 0.0f));
+     }
 
      if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
         view_ = glm::mat4(1.0f);
         view_ = glm::translate(view_, glm::vec3(0.0f,0.0f, L));
-        size = 1.0f;
+        size = default_size;
         glUniform1f(SizeLoc,size);
      }
 	return true;
@@ -132,6 +136,8 @@ void BeginSim() {
 	SizeLoc = glGetUniformLocation(shader.shaderID, "size");
 
 	mat4 model  = glm::mat4(1.0f);
+    //model = glm::translate(model, vec3(100.0f,100.0f,100.0f));
+
 	//mat4 proj  = glm::mat4(1.0f);
     //model = glm::rotate(model, glm::radians(-54.0f), glm::vec3(1.0f, 0.0f, 0.0f));
     //view_ = glm::translate(view_, glm::vec3(-WIDTH/2,-HEIGHT/2,-WIDTH/( 2 *L)));
@@ -144,7 +150,7 @@ void BeginSim() {
 	initTime = glfwGetTime();
 	initTime2 = glfwGetTime();
 
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClearColor(0.1f, 0.3f, 0.8f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	shader.useShader();
@@ -196,10 +202,12 @@ void BeginSim() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        model = glm::translate(model, glm::vec3(cos(t), 0.0f, sin(t)));
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
+        //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
+        glUniform3f(lightPosLoc, r * cos(t), r * sin(t), r * sin(t));
 
         glBindVertexArray(VAO);
         //NOTE: 7 because 7 vertices: 1 center + 5 points + 1 repeat to complete the last triangle
@@ -210,7 +218,7 @@ void BeginSim() {
         //for(int i = 0; i < 7*12;i+=7){
         //    glDrawArrays(GL_TRIANGLE_FAN, i, 7);
         //} 
-        model  = glm::mat4(1.0f);
+        //model  = glm::mat4(1.0f);
         fishModel.Draw(shader);
 
         ImGui::Begin("this dodecagon was hard to make");
