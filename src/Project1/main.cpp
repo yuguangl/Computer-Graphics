@@ -100,7 +100,7 @@ void BeginSim() {
     //TODO: take in a list of shader files
 	Shader shader("VertexShader_2", "FragmentShader");
     Model fishModel("data/fish.obj");
-    fishModel.directory ="data/abstract-geometric-pattern-background_1319-242.jpg";
+
     //TODO: organize this shit
 
     FILE* fp = NULL;
@@ -150,7 +150,7 @@ void BeginSim() {
 	shader.useShader();
 
     //defaults
-    size = 1.0f;
+    size = 50.0f;
     //TODO: turn this into vec for consistency
     GLfloat color[3] = {0.147,0.0, 1.0};
     GLfloat lightColor[3] = {1.0f,1.0f,1.0f};
