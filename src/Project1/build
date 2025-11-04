@@ -1,4 +1,0 @@
-#!/bin/bash
-
-
-/usr/bin/clang++ -O2 -std=c++17 -fdiagnostics-color=always -Wall -g -I/Users/yuguang/Projects/sim/include -L/Users/yuguang/Projects/sim/lib /Users/yuguang/Projects/sim/lib/libglfw.3.dylib /Users/yuguang/Projects/sim/*.cpp /Users/yuguang/Projects/sim/glad.c -o /Users/yuguang/Projects/sim/app -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -framework CoreFoundation -Wno-deprecated -Wl,-rpath,/Users/yuguang/Projects/sim/lib
