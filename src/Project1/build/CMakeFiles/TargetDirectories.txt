@@ -1,0 +1,3 @@
+/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles/g4g1.dir
+/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles/edit_cache.dir
+/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,16 @@
+#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 offset;
+uniform mat4 view;
+uniform mat4 model;
+uniform mat4 proj;
+uniform float size;
+void main()
+{
+    gl_PointSize = 3.0;
+    mat4 offset_model = model;
+    offset_model[3] = vec4( offset, 1.0);
+    vec4 pos = vec4(size * aPos.x, size * aPos.y, size * aPos.z, 1.0);
+	//gl_Position = proj * view * offset_model * pos;
+	gl_Position = proj * view * pos;
+}
