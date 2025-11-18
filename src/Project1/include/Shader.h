@@ -20,6 +20,7 @@ public:
     GLuint vertexShader;
 	//outputs contents of a text file as a string
 	char* get_file_contents(const char* filename);
+    Shader(){return;};
 	Shader(const char* vertexFile, const char* fragmentFile);
 
     void setShader(char* vertexShader, char* fragmentShader);

@@ -24,6 +24,8 @@
 #include "utils.h"
 #include "model.h"
 
+using namespace std;
+
 #define GLM_ENABLE_EXPERIMENTAL
 #define STB_IMAGE_IMPLEMENTATION
 
@@ -36,9 +38,10 @@ float default_size = 50.0;
 bool toggle = true;
 
 
+
 bool processInput(GLFWwindow* window) {
 	 if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-	 	glfwSetWindowShouldClose(window, true);
+         glfwSetWindowShouldClose(window, true);
 	 }
 
      if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
@@ -68,16 +71,40 @@ bool processInput(GLFWwindow* window) {
         toggle = !toggle;
      }
 
-     if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
-        view_ = glm::mat4(1.0f);
-        view_ = glm::translate(view_, glm::vec3(0.0f,0.0f, L));
-        size = default_size;
-        glUniform1f(SizeLoc,size);
-     }
+     //if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
+     //   view_ = glm::mat4(1.0f);
+     //   view_ = glm::translate(view_, glm::vec3(0.0f,0.0f, L));
+     //   size = default_size;
+     //   glUniform1f(SizeLoc,size);
+     //}
 	return true;
 }
 
+struct shader_contents{
+    const char* shader_file[2];
+    char raw_text[2][1024];
+    Shader shader;
+    int id;
+    map<string, int> uni_loc;
+    map<int,mat4> mats;
+    vec3 light_color;
+    vec3 light_pos;
+    vec4 color;
+    float size;
+    Model model;
+};
 
+void make_shader_contents(shader_contents* sc){
+    sc->shader = Shader(sc->shader_file[0], sc->shader_file[1]);
+    sc->id = sc->shader.shaderID;
+    sc->uni_loc.insert({"model", glGetUniformLocation(sc->id, "model")});
+    sc->uni_loc.insert({"view", glGetUniformLocation(sc->id, "view")});
+    sc->uni_loc.insert({"proj", glGetUniformLocation(sc->id, "proj")});
+    sc->uni_loc.insert({"color", glGetUniformLocation(sc->id, "color")});
+    sc->uni_loc.insert({"lightColor", glGetUniformLocation(sc->id, "lightColor")});
+    sc->uni_loc.insert({"lightPos", glGetUniformLocation(sc->id, "lightPos")});
+    sc->uni_loc.insert({"size", glGetUniformLocation(sc->id, "size")});
+}
 
 void BeginSim() {
 	//create window
@@ -103,55 +130,37 @@ void BeginSim() {
     ImGui_ImplOpenGL3_Init("#version 330");//TODO: make this get the version from the vertexshader
 
     int n = 2*3*7*12;
-    //3 coords * 7 vertices per face (1 repeated) * 12 faces * 2 because each vertex needs a normal
 
-    const char* shaderFile[2] = {"../shaders/VertexShader_2","../shaders/FragmentShader"};
-    //TODO: take in a list of shader files
-	Shader shader("../shaders/VertexShader_2", "../shaders/FragmentShader");
-	Shader old_shader("../shaders/VertexShader_2", "../shaders/Old_FragmentShader");
-    Model fishModel("../data/fish.obj");
-
-    //TODO: organize this shit
-
+    shader_contents dodec_sc = {"../shaders/VertexShader_2","../shaders/Old_FragmentShader"};
+    make_shader_contents(&dodec_sc);
+    
+    //dodec_sc.shader = Shader(dodec_sc.shader_file[0], dodec_sc.shader_file[1]);
+    //dodec_sc.id = dodec_sc.shader.shaderID;
     FILE* fp = NULL;
     for(int i = 0; i < 2; i++){
         //fseek(fp, 0, SEEK_END);
         //int fsize = ftell(fp);
         //fseek(fp,0,SEEK_SET);
         //assume file is less than 1kB
-        fp = fopen(shaderFile[i], "rb");
-        fread(shaderContents[i], 1024,sizeof(char), fp);
+        fp = fopen(dodec_sc.shader_file[i], "rb");
+        fread(dodec_sc.raw_text[i], 1024,sizeof(char), fp);
         fclose(fp);
-        strcpy(newShaderContents[i], shaderContents[i]);
+        strcpy(newShaderContents[i], dodec_sc.raw_text[i]);
     }
+
+    shader_contents fish_sc = {"../shaders/VertexShader_2", "../shaders/FragmentShader"};
+    make_shader_contents(&fish_sc);
+	//fish_sc.shader = Shader(fish_sc.shader_file[0],fish_sc.shader_file[1]);
+    fish_sc.model = Model("../data/fish.obj");
+    //fish_sc.id = fish_sc.shader.shaderID;
+
 
 	glfwSwapBuffers(window);
 
-	GLuint VAO, VBO;
-	GLfloat* vertices = (GLfloat*)calloc(n,sizeof(GLfloat));
-    
-	GenerateDodec(vertices);
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	int modelLoc = glGetUniformLocation(shader.shaderID, "model");
-	int viewLoc = glGetUniformLocation(shader.shaderID, "view");
-	int projLoc = glGetUniformLocation(shader.shaderID, "proj");
-	int ColorLoc = glGetUniformLocation(shader.shaderID, "color");
-    int lightColorLoc = glGetUniformLocation(shader.shaderID, "lightColor");
-    int lightPosLoc = glGetUniformLocation(shader.shaderID, "lightPos");
-	SizeLoc = glGetUniformLocation(shader.shaderID, "size");
-
-	mat4 model  = glm::mat4(1.0f);
+	mat4 model = glm::mat4(1.0f);
     view_ = glm::translate(view_, glm::vec3(0.0f,0.0f, L));
 	mat4 proj = glm::perspective(glm::radians(-45.0f), -(float)width/(float)height,0.1f,5000.0f);
-   
-	int old_modelLoc = glGetUniformLocation(old_shader.shaderID, "model");
-	int old_viewLoc = glGetUniformLocation(old_shader.shaderID, "view");
-	int old_projLoc = glGetUniformLocation(old_shader.shaderID, "proj");
-	int old_ColorLoc = glGetUniformLocation(old_shader.shaderID, "color");
-    int old_lightColorLoc = glGetUniformLocation(old_shader.shaderID, "lightColor");
-    int old_lightPosLoc = glGetUniformLocation(old_shader.shaderID, "lightPos");
-	old_SizeLoc = glGetUniformLocation(old_shader.shaderID, "size");
 
 	initTime = glfwGetTime();
 	initTime2 = glfwGetTime();
@@ -159,24 +168,29 @@ void BeginSim() {
 	glClearColor(0.1f, 0.3f, 0.8f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	shader.useShader();
-
-    //defaults
-    size = 50.0f;
-    //TODO: turn this into vec for consistency
+    //TODO: turn this into vec for consistency but if its a vec it might not behave well with imgui sliders
     GLfloat color[3] = {0.147,0.0, 1.0};
     GLfloat lightColor[3] = {1.0f,1.0f,1.0f};
     GLfloat lightPos[3] = {1.0f,-150.0f,150.0f};
-    glUniform1f(SizeLoc,size);
-    glUniform3f(ColorLoc, color[0], color[1], color[2]);
-    glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
-    glUniform3f(lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
-    old_shader.useShader();
+    size = 50.0f;
 
-    glUniform1f(old_SizeLoc,size);
-    glUniform3f(old_ColorLoc, color[0], color[1], color[2]);
-    glUniform3f(old_lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
-    glUniform3f(old_lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
+	fish_sc.shader.useShader();
+    glUniform1f(fish_sc.uni_loc["size"],size);
+    glUniform3f(fish_sc.uni_loc["color"], color[0], color[1], color[2]);
+    glUniform3f(fish_sc.uni_loc["lightColor"], lightColor[0], lightColor[1], lightColor[2]);
+    glUniform3f(fish_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
+
+    //defaults
+    dodec_sc.shader.useShader();
+    glUniform1f(dodec_sc.uni_loc["size"],size);
+    glUniform3f(dodec_sc.uni_loc["color"], color[0], color[1], color[2]);
+    glUniform3f(dodec_sc.uni_loc["lightColor"], lightColor[0], lightColor[1], lightColor[2]);
+    glUniform3f(dodec_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
+
+	GLuint VAO, VBO;
+	GLfloat* vertices = (GLfloat*)calloc(n,sizeof(GLfloat));
+    
+	GenerateDodec(vertices);
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -200,6 +214,7 @@ void BeginSim() {
 
     struct timeval stop, start;
     gettimeofday(&start, NULL);
+    //toggle = false;
     //do stuff
 
     mat4 model_2 = glm::mat4(1.0f);
@@ -229,70 +244,72 @@ void BeginSim() {
         //glDrawArrays(GL_TRIANGLE_FAN, 0, 7);
         
         if(toggle){
-            old_shader.useShader();
+            dodec_sc.shader.useShader();
             model = glm::mat4(1.0f);
-            glUniformMatrix4fv(old_projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-            glUniformMatrix4fv(old_viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
-            glUniformMatrix4fv(old_modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+            glUniformMatrix4fv(dodec_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view_));
+            glUniformMatrix4fv(dodec_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
             //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
-            glUniform3f(old_lightPosLoc, r * cos(t), r * sin(t), r * sin(t));
+            glUniform3f(dodec_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
             for(int i = 0; i < 7*12;i+=7){
                 glDrawArrays(GL_TRIANGLE_FAN, i, 7);
-            } 
+        } 
         }else{
             model = glm::mat4(1.0f);
-            glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            glUniformMatrix4fv(fish_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+            glUniformMatrix4fv(fish_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view_));
+            glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
             //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
-            glUniform3f(lightPosLoc, r * cos(t), r * sin(t), r * sin(t));
+            glUniform3f(fish_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
 
-            shader.useShader();
+            fish_sc.shader.useShader();
 
-            model_2 = glm::translate(model_2, glm::vec3(cos(t), 0.0f, sin(t)));
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model_2));
-            fishModel.Draw(shader);
+            //model_2 = glm::translate(model_2, glm::vec3(cos(t), 0.0f, sin(t)));
+            //glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model_2));
+            fish_sc.model.Draw(fish_sc.shader);
         }
 
         ImGui::Begin("this dodecagon was hard to make");
-        if(ImGui::Button("save shaders")){
-            for(int i = 0; i < 2; i++){
-                if(strcmp(shaderContents[i],newShaderContents[i]) != 0){
-                    save_shaders(shaderFile[i],newShaderContents[i]);
-                }
-            }
-        }
-        if(ImGui::Button("run shaders")){
-            
-            printf("hi\n");
-            shader.changeShader(newShaderContents[0], newShaderContents[1]);
+        //if(ImGui::Button("save shaders")){
+        //    for(int i = 0; i < 2; i++){
+        //        if(strcmp(shaderContents[i],newShaderContents[i]) != 0){
+        //            save_shaders(shaderFile[i],newShaderContents[i]);
+        //        }
+        //    }
+        //}
 
-            modelLoc = glGetUniformLocation(shader.shaderID, "model");
-            viewLoc = glGetUniformLocation(shader.shaderID, "view");
-            projLoc = glGetUniformLocation(shader.shaderID, "proj");
-            ColorLoc = glGetUniformLocation(shader.shaderID, "color");
-            lightColorLoc = glGetUniformLocation(shader.shaderID, "lightColor");
-            lightPosLoc = glGetUniformLocation(shader.shaderID, "lightPos");
-            SizeLoc = glGetUniformLocation(shader.shaderID, "size");
-            glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
-            glUniform3f(lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
+        //    
+        //if(ImGui::Button("run shaders")){
+        //    
+        //    printf("hi\n");
+        //    shader.changeShader(newShaderContents[0], newShaderContents[1]);
 
-            shader.useShader();
-        }
-        for(int i = 0; i < 2; i++){
-            ImGui::InputTextMultiline(shaderFile[i],newShaderContents[i], 1024, ImVec2(500,300));
-        }
+        //    modelLoc = glGetUniformLocation(shader.shaderID, "model");
+        //    viewLoc = glGetUniformLocation(shader.shaderID, "view");
+        //    projLoc = glGetUniformLocation(shader.shaderID, "proj");
+        //    ColorLoc = glGetUniformLocation(shader.shaderID, "color");
+        //    lightColorLoc = glGetUniformLocation(shader.shaderID, "lightColor");
+        //    lightPosLoc = glGetUniformLocation(shader.shaderID, "lightPos");
+        //    SizeLoc = glGetUniformLocation(shader.shaderID, "size");
+        //    glUniform3f(lightColorLoc, lightColor[0], lightColor[1], lightColor[2]);
+        //    glUniform3f(lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
+
+        //    shader.useShader();
+        //}
+        //for(int i = 0; i < 2; i++){
+        //    ImGui::InputTextMultiline(shaderFile[i],newShaderContents[i], 1024, ImVec2(500,300));
+        //}
         //ImGui::SliderFloat("Size", &size, 0.1f, 5.0f);
         ImGui::SliderFloat("Size", &size, 0.1f, 50.0f);
         ImGui::ColorEdit4("Color",color);
         ImGui::ColorEdit3("lightColor",lightColor);
         ImGui::End();
 
-        glUniform1f(SizeLoc,size);
-        glUniform3f(ColorLoc, color[0], color[1], color[2]);
+        glUniform1f(fish_sc.uni_loc["size"],size);
+        glUniform3f(fish_sc.uni_loc["color"], color[0], color[1], color[2]);
 
-        glUniform1f(old_SizeLoc,size);
-        glUniform3f(old_ColorLoc, color[0], color[1], color[2]);
+        glUniform1f(dodec_sc.uni_loc["size"],size);
+        glUniform3f(dodec_sc.uni_loc["color"], color[0], color[1], color[2]);
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -302,8 +319,8 @@ void BeginSim() {
 	}
     //save shaders just in case:
     for(int i = 0; i < 2; i++){
-        if(strcmp(shaderContents[i],newShaderContents[i]) != 0){
-            save_shaders(shaderFile[i],newShaderContents[i]);
+        if(strcmp(dodec_sc.raw_text[i],newShaderContents[i]) != 0){
+            save_shaders(dodec_sc.shader_file[i],newShaderContents[i]);
         }
     }
 	glDeleteVertexArrays(1, &VAO);
@@ -311,7 +328,8 @@ void BeginSim() {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
-	shader.Delete();
+	dodec_sc.shader.Delete();
+	fish_sc.shader.Delete();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return;
