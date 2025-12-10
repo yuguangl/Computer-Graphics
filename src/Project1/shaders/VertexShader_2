@@ -13,8 +13,7 @@ out vec3 FragPos;
 void main()
 {
     TexCoord = aTexCoord;
-    gl_PointSize = 3.0;
-    vec3 adj_pos = size * aPos + offset;
+    vec3 adj_pos = size * aPos;
     vec4 pos = vec4(adj_pos.x, adj_pos.y, adj_pos.z, 1.0);
 	gl_Position = proj * view * model * pos;
     //FragPos = vec3(model * vec4(pos.x, pos.y, pos.z, 1.0));

@@ -32,13 +32,15 @@ using namespace std;
 #define STB_IMAGE_IMPLEMENTATION
 
 mat4 view_ = glm::mat4(1.0f);
+mat4 model = glm::mat4(1.0f);
 float L = -WIDTH/(2 *(tan( 22.5f * 3.1415926535/180 ))); //why am i using float not GLfloat too lazy to change
 int SizeLoc;
 int old_SizeLoc;
 float size; 
-float default_size = 50.0;
+float default_size = 1.0;
 bool toggle = true;
 int zoom = 4;
+int init_radius = RADIUS;
 
 bool processInput(GLFWwindow* window) {
 	 if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -52,10 +54,10 @@ bool processInput(GLFWwindow* window) {
         view_ = glm::translate(view_, glm::vec3(0.0f, -zoom, 0.0f));  
      }
 
-     if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+     if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
         view_ = glm::translate(view_, glm::vec3(zoom, 0.0f, 0.0f));  
      }
-     if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+     if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
         view_ = glm::translate(view_, glm::vec3(-zoom, 0.0f, 0.0f));  
      }
 
@@ -65,11 +67,41 @@ bool processInput(GLFWwindow* window) {
      if(glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS){
         view_ = glm::translate(view_, glm::vec3(0.0f, 0.0f, -zoom));  
      }
-     if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS){
+
+     if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS){
         toggle = !toggle;
      }
+     
+     if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS){
+        vec3 a = vec3(0,WIDTH/2,WIDTH/2);
+        vec3 b = vec3(WIDTH,WIDTH/2,WIDTH/2);
+        vec3 axis = normalize(b - a);
+        view_ = glm::rotate(view_,(float)glm::radians(1.0), axis);  
+     }
+
+     if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS){
+        view_ = glm::rotate(view_,(float)glm::radians(-1.0), glm::vec3(0.0f, 1.0f, 0.0f));  
+     }
+
+     if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS){
+        view_ = glm::rotate(view_,(float)glm::radians(1.0), glm::vec3(1.0f, 0.0f, 0.0f));  
+     }
+
+     if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS){
+        vec3 a = vec3(0,WIDTH/2,WIDTH/2);
+        vec3 b = vec3(WIDTH,WIDTH/2,WIDTH/2);
+        vec3 axis = normalize(b - a);
+        model = glm::rotate(model,(float)glm::radians(1.0), axis);  
+        //glm::vec3 globalPivot = glm::vec3(WIDTH/2, HEIGHT/2, 0);
+        //model = glm::mat4(1.0f);
+        //model = glm::translate(model, globalPivot);
+        //model = glm::rotate(model,(float)glm::radians(1.0), glm::vec3(0,0,1));
+        //model = glm::translate(model, -globalPivot);
+     }
+
 
      if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
+        model = glm::mat4(1.0f);
         view_ = glm::mat4(1.0f);
         view_ = glm::translate(view_, glm::vec3(-WIDTH/2,-HEIGHT/2, L));
         size = default_size;
@@ -164,14 +196,13 @@ void BeginSim() {
     shader_contents fish_sc = {"../shaders/VertexShader_2", "../shaders/FragmentShader"};
     make_shader_contents(&fish_sc);
 	//fish_sc.shader = Shader(fish_sc.shader_file[0],fish_sc.shader_file[1]);
-    fish_sc.model = Model("../data/fish.obj");
+    fish_sc.model = Model("../data/ylfish.obj");
     //fish_sc.id = fish_sc.shader.shaderID;
 
 	glfwSwapBuffers(window);
 
-	mat4 model = glm::mat4(1.0f);
     view_ = glm::translate(view_, glm::vec3(-WIDTH/2,-HEIGHT/2, L));
-	mat4 proj = glm::perspective(glm::radians(-45.0f), -(float)width/(float)height,0.1f,5000.0f);
+	mat4 proj = glm::perspective(glm::radians(45.0f), (float)width/(float)height,0.1f,5000.0f);
 
 	initTime = glfwGetTime();
 	initTime2 = glfwGetTime();
@@ -183,7 +214,7 @@ void BeginSim() {
     GLfloat color[3] = {0.147,0.0, 1.0};
     GLfloat lightColor[3] = {1.0f,1.0f,1.0f};
     GLfloat lightPos[3] = {1.0f,-150.0f,150.0f};
-    size = 50.0f;
+    size = default_size;
 
 	fish_sc.shader.useShader();
     glUniform1f(fish_sc.uni_loc["size"],size);
@@ -206,7 +237,6 @@ void BeginSim() {
     MakeParticleGrid(particles);
     setup_random();
 
-
     glm::vec3 model_offsets[NUM_PARTICLES];
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -225,16 +255,16 @@ void BeginSim() {
     glEnableVertexAttribArray(3);
 
 //  instance
-    glGenBuffers(1, &instanceVBO);
-    glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * NUM_PARTICLES, &model_offsets[0], GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER,0);
+    //glGenBuffers(1, &instanceVBO);
+    //glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * NUM_PARTICLES, &model_offsets[0], GL_DYNAMIC_DRAW);
+    //glBindBuffer(GL_ARRAY_BUFFER,0);
 
-    glEnableVertexAttribArray(3);
-    glVertexAttribPointer(3,3,GL_FLOAT,GL_FALSE, 3 * sizeof(float), (void*)0);
-    glBindBuffer(GL_ARRAY_BUFFER,0);
-    glVertexAttribDivisor(3,1);
-    glBindVertexArray(0);
+    //glEnableVertexAttribArray(3);
+    //glVertexAttribPointer(3,3,GL_FLOAT,GL_FALSE, 3 * sizeof(float), (void*)0);
+    //glBindBuffer(GL_ARRAY_BUFFER,0);
+    //glVertexAttribDivisor(3,1);
+    //glBindVertexArray(0);
 
     glEnable(GL_DEPTH_TEST);
 
@@ -244,10 +274,12 @@ void BeginSim() {
 
     struct timeval stop, start;
     gettimeofday(&start, NULL);
-    //toggle = false;
+    toggle = false;
+    float ae = 0;
     //do stuff
 
     mat4 model_2 = glm::mat4(1.0f);
+    model = glm::mat4(1.0f);
 	while (!glfwWindowShouldClose(window)) {
         gettimeofday(&stop, NULL);
         double t = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec) / 1000000.0;
@@ -260,7 +292,6 @@ void BeginSim() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        model = glm::mat4(1.0f);
 //        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
 //        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view_));
 //        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -280,25 +311,26 @@ void BeginSim() {
             //    model_offsets[i] = particles[i].curr;
             //}
             dodec_sc.shader.useShader();
-            model = glm::mat4(1.0f);
             for(int i = 0; i < NUM_PARTICLES; i++){
-            
-                vec3 p = particles[i].curr;
-                p.z = -p.z;
-                //p = vec3(2,2,2);
-                cout << glm::to_string(p) << endl;
+                Particle p = particles[i];
+                p.curr.z = -p.curr.z;
+                ae += 0.01;
+                model = mat4(1.0f);
+                glm::vec3 dir = glm::normalize(particles[i].curr - particles[i].prev);   // the direction you want to face
+                float yaw = atan2(dir.x, dir.z);
+                float pitch = -asin(dir.y);
+                model = glm::translate(model, glm::vec3(p.curr));
+                model = glm::rotate(model, yaw, glm::vec3(0,1,0));
+                model = glm::rotate(model, pitch, glm::vec3(1,0,0));
                 glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
                 glUniformMatrix4fv(dodec_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view_));
-                glUniform3f(dodec_sc.uni_loc["offset"],p.x,p.y,p.z);
                 glUniformMatrix4fv(dodec_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
                 //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
                 glUniform3f(dodec_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
-                for(int i = 0; i < 7*12;i+=7){
-                    glDrawArrays(GL_TRIANGLE_FAN, i, 7);
+                for(int j = 0; j < 7*12;j+=7){
+                    glDrawArrays(GL_TRIANGLE_FAN, j, 7);
                 }
             }
-
-
             //glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
             //glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * NUM_PARTICLES, &model_offsets[0], GL_DYNAMIC_DRAW);
             //glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -308,19 +340,34 @@ void BeginSim() {
             //glBindVertexArray(0);
 
         }else{
-            model = glm::mat4(1.0f);
-            glUniformMatrix4fv(fish_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
-            glUniformMatrix4fv(fish_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view_));
-            glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
-            //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
-            glUniform3f(fish_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+            for(int i = 0; i < NUM_PARTICLES; i++){
+                Particle p = particles[i];
+                ae += 0.01;
+                model = mat4(1.0f);
+                glm::vec3 dir = glm::normalize(particles[i].curr - particles[i].prev);   // the direction you want to face
+                float yaw = atan2(dir.x, dir.z);
+                float pitch = -asin(dir.y);
+                model = glm::translate(model, glm::vec3(p.curr));
+                model = glm::rotate(model, yaw, glm::vec3(0,1,0));
+                model = glm::rotate(model, pitch, glm::vec3(1,0,0));
 
-            fish_sc.shader.useShader();
+                glUniformMatrix4fv(fish_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+                glUniformMatrix4fv(fish_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view_));
+                glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                glUniform3f(dodec_sc.uni_loc["offset"],p.curr.x,p.curr.y,p.curr.z);
+                glUniform3f(fish_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
 
-            //model_2 = glm::translate(model_2, glm::vec3(cos(t), 0.0f, sin(t)));
-            //glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model_2));
-            fish_sc.model.Draw(fish_sc.shader);
+                fish_sc.shader.useShader();
+
+                //model_2 = glm::translate(model_2, glm::vec3(cos(t), 0.0f, sin(t)));
+                //glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model_2));
+                fish_sc.model.Draw(fish_sc.shader);
+            }
         }
+
+        finalTime = glfwGetTime();
+        finalTime2 = glfwGetTime();
+        Update(window);
 
         double mouseX, mouseY;
         glfwGetCursorPos(window, &mouseX, &mouseY);
@@ -357,6 +404,7 @@ void BeginSim() {
         //}
         //ImGui::SliderFloat("Size", &size, 0.1f, 5.0f);
         ImGui::SliderFloat("Size", &size, 0.1f, 50.0f);
+        RADIUS = init_radius + size;
         ImGui::ColorEdit4("Color",color);
         ImGui::ColorEdit3("lightColor",lightColor);
         ImGui::End();

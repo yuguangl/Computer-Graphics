@@ -32,7 +32,6 @@ using namespace std;
 
 #define PI 3.1415926535897932384626433
 #define SEGMENTS 15 // just dont go over 90 for some reason
-#define RADIUS 3 // >= 4 for some reason AND NOT 7 BECAUSE WEIRD BUG HAPPENS maybe hashing issue again? and 15 wtfwtfwtfwtfwtf things become nan?
 #define WIDTH 800//TODO: bro can you make this fullscreen or relative to screen size or smth  man
 #define HEIGHT 800
 #define DEPTH 800
@@ -75,6 +74,7 @@ extern bool mouseForce;
 extern bool hashError;
 extern GLFWwindow* window;
 extern Particle particles[MAX_PARTICLES];
+extern int RADIUS;
 
 //tunable boid parameters
 extern float avoid_radius;
