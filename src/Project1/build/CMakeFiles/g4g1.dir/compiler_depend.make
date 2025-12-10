@@ -3493,7 +3493,6 @@ CMakeFiles/g4g1.dir/src/main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/sr
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/id.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/poll_with_backoff.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__threading_support \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/make_tuple_types.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/pair_like.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/sfinae_helpers.h \
@@ -3709,7 +3708,6 @@ CMakeFiles/g4g1.dir/src/main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/sr
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/limits \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/locale \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/locale.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/math.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/memory \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/mutex \
@@ -3735,7 +3733,6 @@ CMakeFiles/g4g1.dir/src/main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/sr
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/type_traits \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/typeinfo \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/unordered_map \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/unordered_set \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/utility \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/variant \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/vector \
@@ -3891,9 +3888,6 @@ CMakeFiles/g4g1.dir/src/main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/sr
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdarg.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdint.h \
-  /Users/yuguang/Projects/Computer-Graphics/src/Project1/include/camera.h \
-  /Users/yuguang/Projects/Computer-Graphics/src/Project1/include/mesh.h \
-  /Users/yuguang/Projects/Computer-Graphics/src/Project1/include/model.h \
   /Users/yuguang/Projects/Computer-Graphics/src/Project1/include/shader_m.h \
   /Users/yuguang/Projects/OpenGL/includes/GLFW/glfw3.h \
   /Users/yuguang/Projects/OpenGL/includes/KHR/khrplatform.h \
@@ -4050,38 +4044,7 @@ CMakeFiles/g4g1.dir/src/main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/sr
   /Users/yuguang/Projects/OpenGL/includes/glm/vec2.hpp \
   /Users/yuguang/Projects/OpenGL/includes/glm/vec3.hpp \
   /Users/yuguang/Projects/OpenGL/includes/glm/vec4.hpp \
-  /Users/yuguang/Projects/OpenGL/includes/glm/vector_relational.hpp \
-  /Users/yuguang/Projects/OpenGL/includes/stb_image.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/Compiler/poppack1.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/Compiler/pushpack1.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/Importer.hpp \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/MathFunctions.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/aabb.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/anim.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/camera.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/color4.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/color4.inl \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/config.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/defs.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/light.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/material.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/material.inl \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/matrix3x3.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/matrix3x3.inl \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/matrix4x4.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/matrix4x4.inl \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/mesh.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/metadata.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/postprocess.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/quaternion.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/quaternion.inl \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/scene.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/texture.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/types.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/vector2.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/vector2.inl \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/vector3.h \
-  /opt/homebrew/Cellar/assimp/6.0.2/include/assimp/vector3.inl
+  /Users/yuguang/Projects/OpenGL/includes/glm/vector_relational.hpp
 
 CMakeFiles/g4g1.dir/src/old_main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/old_main.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
@@ -9832,41 +9795,7 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/calendar.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/vector2.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/scene.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/mesh.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/matrix4x4.inl:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/matrix4x4.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/matrix3x3.inl:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/material.inl:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/material.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/defs.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/camera.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/anim.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/MathFunctions.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/Importer.hpp:
-
 /Users/yuguang/Projects/Computer-Graphics/src/Project1/include/shader_m.h:
-
-/Users/yuguang/Projects/Computer-Graphics/src/Project1/include/model.h:
-
-/Users/yuguang/Projects/Computer-Graphics/src/Project1/include/mesh.h:
-
-/Users/yuguang/Projects/Computer-Graphics/src/Project1/include/camera.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/unordered_set:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream:
 
@@ -9945,8 +9874,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 /Users/yuguang/Projects/OpenGL/includes/glm/detail/type_vec.hpp:
 
 /Users/yuguang/Projects/OpenGL/includes/glm/detail/type_mat4x4.hpp:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/texture.h:
 
 /Users/yuguang/Projects/OpenGL/includes/glm/detail/type_mat3x4.inl:
 
@@ -10059,8 +9986,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_blksize_t.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tree:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h:
 
@@ -10217,8 +10142,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/sfinae_helpers.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/pair_like.h:
-
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/map:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/system_error.h:
 
@@ -10618,8 +10541,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_uuid_t.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/metadata.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/builtin_new_allocator.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/compare_weak_order_fallback.h:
@@ -10629,8 +10550,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int64_t.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/countl.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/aabb.h:
 
 /Users/yuguang/Projects/OpenGL/includes/glm/detail/type_vec4.inl:
 
@@ -10762,8 +10681,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/replace_copy.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/Compiler/pushpack1.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/type_identity.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/time_point.h:
@@ -10883,8 +10800,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__charconv/to_chars_floating_point.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/color4.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/unistd.h:
 
@@ -11056,8 +10971,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl_any_all_none_of.h:
 
-/Users/yuguang/Projects/OpenGL/includes/stb_image.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/istream_iterator.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/prev_permutation.h:
@@ -11065,8 +10978,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pop_heap.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_parse_context.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/light.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/derived_from.h:
 
@@ -11136,8 +11047,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/inplace_merge.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/config.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/invoke.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site:
@@ -11198,8 +11107,6 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_bounded_array.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/vector2.inl:
-
 /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/imgui_impl_glfw.cpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/fill.h:
@@ -11234,8 +11141,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_wctype_t.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/quaternion.h:
-
 /Users/yuguang/Projects/OpenGL/includes/imstb_truetype.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/ios.h:
@@ -11255,8 +11160,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/copyable.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_time.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/color4.inl:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/__stddef_size_t.h:
 
@@ -11506,8 +11409,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/set_intersection.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/vector3.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigset_t.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_trivially_copy_constructible.h:
@@ -11587,8 +11488,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__hash_table:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/machine/_endian.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/matrix3x3.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_member_object_pointer.h:
 
@@ -11740,8 +11639,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/common_type.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/Compiler/poppack1.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_partition.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/limits:
@@ -11825,8 +11722,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_sample.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/error_functions.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/quaternion.inl:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_blkcnt_t.h:
 
@@ -12052,8 +11947,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/iter_move.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/postprocess.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_ssize_t.h:
 
 /Users/yuguang/Projects/Computer-Graphics/src/Project1/include/particle.h:
@@ -12172,8 +12065,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_constructible.h:
 
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/types.h:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/lexicographical_compare.h:
 
 /Users/yuguang/Projects/Computer-Graphics/src/3rdParty/glad.c:
@@ -12199,8 +12090,6 @@ CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp:
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/movable.h:
-
-/opt/homebrew/Cellar/assimp/6.0.2/include/assimp/vector3.inl:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/bit_cast.h:
 
