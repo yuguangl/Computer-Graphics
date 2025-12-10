@@ -23,6 +23,8 @@
 #include "Shader.h"
 #include "utils.h"
 #include "model.h"
+#include "simulate.h"
+#include "particle.h"
 
 using namespace std;
 
@@ -36,46 +38,58 @@ int old_SizeLoc;
 float size; 
 float default_size = 50.0;
 bool toggle = true;
+int zoom = 4;
 
 bool processInput(GLFWwindow* window) {
 	 if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
          glfwSetWindowShouldClose(window, true);
 	 }
 
-     if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
-        view_ = glm::rotate(view_,(float)glm::radians(1.0), glm::vec3(0.0f, 1.0f, 0.0f));  
-     }
-     if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
-        view_ = glm::rotate(view_,(float)glm::radians(-1.0), glm::vec3(0.0f, 1.0f, 0.0f));  
-     }
-
      if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        view_ = glm::rotate(view_,(float)glm::radians(1.0), glm::vec3(1.0f, 0.0f, 0.0f));  
+        view_ = glm::translate(view_, glm::vec3(0.0f,zoom, 0.0f));  
      }
      if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        view_ = glm::rotate(view_,(float)glm::radians(-1.0), glm::vec3(1.0f, 0.0f, 0.0f));  
+        view_ = glm::translate(view_, glm::vec3(0.0f, -zoom, 0.0f));  
+     }
+
+     if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+        view_ = glm::translate(view_, glm::vec3(zoom, 0.0f, 0.0f));  
+     }
+     if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+        view_ = glm::translate(view_, glm::vec3(-zoom, 0.0f, 0.0f));  
      }
 
      if(glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS){
-        view_ = glm::rotate(view_,(float)glm::radians(1.0), glm::vec3(0.0f, 0.0f, 1.0f));  
+        view_ = glm::translate(view_, glm::vec3(0.0f, 0.0f, zoom));  
      }
      if(glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS){
-        view_ = glm::rotate(view_,(float)glm::radians(-1.0), glm::vec3(0.0f, 0.0f, 1.0f));  
-     }
-     if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS){
-        view_ = glm::translate(view_, glm::vec3(0.0f,-1.0f, 0.0f));
+        view_ = glm::translate(view_, glm::vec3(0.0f, 0.0f, -zoom));  
      }
      if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS){
         toggle = !toggle;
      }
 
-     //if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
-     //   view_ = glm::mat4(1.0f);
-     //   view_ = glm::translate(view_, glm::vec3(0.0f,0.0f, L));
-     //   size = default_size;
-     //   glUniform1f(SizeLoc,size);
-     //}
+     if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS){
+        view_ = glm::mat4(1.0f);
+        view_ = glm::translate(view_, glm::vec3(-WIDTH/2,-HEIGHT/2, L));
+        size = default_size;
+        glUniform1f(SizeLoc,size);
+     }
 	return true;
+}
+
+void setup_random(){
+    randomize_init_location(particles);
+    //TODO: this is naive it should fill the hashgrid and check
+    for(int i = 0; i < 5; i++){
+        //HandleCollisions();
+        BruteForceCollisionCheck();
+        updatePositions();
+        checkBounds();
+    }
+    //this is because i chose to do naive way temp so the particle
+    //prevs are all off so im just going to readjust them to be chill
+    adjust_init_prev(particles);
 }
 
 struct shader_contents{
@@ -96,6 +110,7 @@ void make_shader_contents(shader_contents* sc){
     sc->shader = Shader(sc->shader_file[0], sc->shader_file[1]);
     sc->id = sc->shader.shaderID;
     sc->uni_loc.insert({"model", glGetUniformLocation(sc->id, "model")});
+    sc->uni_loc.insert({"offset", glGetUniformLocation(sc->id, "offset")});
     sc->uni_loc.insert({"view", glGetUniformLocation(sc->id, "view")});
     sc->uni_loc.insert({"proj", glGetUniformLocation(sc->id, "proj")});
     sc->uni_loc.insert({"color", glGetUniformLocation(sc->id, "color")});
@@ -155,7 +170,7 @@ void BeginSim() {
 	glfwSwapBuffers(window);
 
 	mat4 model = glm::mat4(1.0f);
-    view_ = glm::translate(view_, glm::vec3(0.0f,0.0f, L));
+    view_ = glm::translate(view_, glm::vec3(-WIDTH/2,-HEIGHT/2, L));
 	mat4 proj = glm::perspective(glm::radians(-45.0f), -(float)width/(float)height,0.1f,5000.0f);
 
 	initTime = glfwGetTime();
@@ -183,23 +198,43 @@ void BeginSim() {
     glUniform3f(dodec_sc.uni_loc["lightColor"], lightColor[0], lightColor[1], lightColor[2]);
     glUniform3f(dodec_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
 
-	GLuint VAO, VBO;
+	GLuint VAO, VBO, instanceVBO;
 	GLfloat* vertices = (GLfloat*)calloc(n,sizeof(GLfloat));
     
+    //MAKE DODECAHEDRON
 	GenerateDodec(vertices);
+    MakeParticleGrid(particles);
+    setup_random();
 
+
+    glm::vec3 model_offsets[NUM_PARTICLES];
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glBindVertexArray(VAO);
 
+    //aPos
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, n * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    //Normals
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
     glBindBuffer(GL_ARRAY_BUFFER,0);
-    glBindVertexArray(1);
+    glBindVertexArray(0);
+    glEnableVertexAttribArray(3);
+
+//  instance
+    glGenBuffers(1, &instanceVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * NUM_PARTICLES, &model_offsets[0], GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER,0);
+
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3,3,GL_FLOAT,GL_FALSE, 3 * sizeof(float), (void*)0);
+    glBindBuffer(GL_ARRAY_BUFFER,0);
+    glVertexAttribDivisor(3,1);
+    glBindVertexArray(0);
 
     glEnable(GL_DEPTH_TEST);
 
@@ -239,16 +274,39 @@ void BeginSim() {
         //glDrawArrays(GL_TRIANGLE_FAN, 0, 7);
         
         if(toggle){
+            //for (int i = 0; i < NUM_PARTICLES; i++) {
+            //    particles[i].curr = vec3(0);
+            //    cout << glm::to_string(particles[i].curr) << endl;
+            //    model_offsets[i] = particles[i].curr;
+            //}
             dodec_sc.shader.useShader();
             model = glm::mat4(1.0f);
-            glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
-            glUniformMatrix4fv(dodec_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view_));
-            glUniformMatrix4fv(dodec_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
-            //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
-            glUniform3f(dodec_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
-            for(int i = 0; i < 7*12;i+=7){
-                glDrawArrays(GL_TRIANGLE_FAN, i, 7);
-        } 
+            for(int i = 0; i < NUM_PARTICLES; i++){
+            
+                vec3 p = particles[i].curr;
+                p.z = -p.z;
+                //p = vec3(2,2,2);
+                cout << glm::to_string(p) << endl;
+                glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+                glUniformMatrix4fv(dodec_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view_));
+                glUniform3f(dodec_sc.uni_loc["offset"],p.x,p.y,p.z);
+                glUniformMatrix4fv(dodec_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
+                glUniform3f(dodec_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+                for(int i = 0; i < 7*12;i+=7){
+                    glDrawArrays(GL_TRIANGLE_FAN, i, 7);
+                }
+            }
+
+
+            //glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+            //glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * NUM_PARTICLES, &model_offsets[0], GL_DYNAMIC_DRAW);
+            //glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+            //glBindVertexArray(VAO);
+            //glDrawArraysInstanced(GL_TRIANGLE_FAN,0, 7, 12); 
+            //glBindVertexArray(0);
+
         }else{
             model = glm::mat4(1.0f);
             glUniformMatrix4fv(fish_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
@@ -264,7 +322,10 @@ void BeginSim() {
             fish_sc.model.Draw(fish_sc.shader);
         }
 
+        double mouseX, mouseY;
+        glfwGetCursorPos(window, &mouseX, &mouseY);
         ImGui::Begin("this dodecagon was hard to make");
+        ImGui::Text("Mouse Position: (%.1f, %.1f)", mouseX, mouseY);
         //if(ImGui::Button("save shaders")){
         //    for(int i = 0; i < 2; i++){
         //        if(strcmp(shaderContents[i],newShaderContents[i]) != 0){
@@ -309,6 +370,7 @@ void BeginSim() {
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
+
         glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -332,7 +394,7 @@ void BeginSim() {
 
 int main() {
 	//Initialization
-	//srand(static_cast <unsigned> (time(0)));
+	srand(static_cast <unsigned> (time(0)));
     printf("HELPME\n");
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

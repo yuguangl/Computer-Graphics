@@ -20,7 +20,11 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/yuguang/Projects/Computer-Graphics/src/Project1/src/Shader.cpp" "CMakeFiles/g4g1.dir/src/Shader.cpp.o" "gcc" "CMakeFiles/g4g1.dir/src/Shader.cpp.o.d"
   "/Users/yuguang/Projects/Computer-Graphics/src/Project1/src/dodec.cpp" "CMakeFiles/g4g1.dir/src/dodec.cpp.o" "gcc" "CMakeFiles/g4g1.dir/src/dodec.cpp.o.d"
   "/Users/yuguang/Projects/Computer-Graphics/src/Project1/src/main.cpp" "CMakeFiles/g4g1.dir/src/main.cpp.o" "gcc" "CMakeFiles/g4g1.dir/src/main.cpp.o.d"
+  "/Users/yuguang/Projects/Computer-Graphics/src/Project1/src/old_main.cpp" "CMakeFiles/g4g1.dir/src/old_main.cpp.o" "gcc" "CMakeFiles/g4g1.dir/src/old_main.cpp.o.d"
+  "/Users/yuguang/Projects/Computer-Graphics/src/Project1/src/particle.cpp" "CMakeFiles/g4g1.dir/src/particle.cpp.o" "gcc" "CMakeFiles/g4g1.dir/src/particle.cpp.o.d"
+  "/Users/yuguang/Projects/Computer-Graphics/src/Project1/src/simulate.cpp" "CMakeFiles/g4g1.dir/src/simulate.cpp.o" "gcc" "CMakeFiles/g4g1.dir/src/simulate.cpp.o.d"
   "/Users/yuguang/Projects/Computer-Graphics/src/Project1/src/utils.cpp" "CMakeFiles/g4g1.dir/src/utils.cpp.o" "gcc" "CMakeFiles/g4g1.dir/src/utils.cpp.o.d"
+  "/Users/yuguang/Projects/Computer-Graphics/src/Project1/src/variables.cpp" "CMakeFiles/g4g1.dir/src/variables.cpp.o" "gcc" "CMakeFiles/g4g1.dir/src/variables.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -10,6 +10,6 @@
 using namespace std;
 using namespace glm;
 
-float GetDistance(vec2 p1, vec2 p2); 
+float GetDistance(vec3 p1, vec3 p2); 
 void save_shaders(const char* newShaderFile, char newShaderContent[1024]);
 

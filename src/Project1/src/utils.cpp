@@ -14,9 +14,9 @@ using namespace std;
 using namespace glm;
 
 
-float GetDistance(vec2 p1, vec2 p2) {
-	vec2 diff = (p1 - p2);
-	return sqrt(diff.x * diff.x + diff.y * diff.y);
+float GetDistance(vec3 p1, vec3 p2) {
+	vec3 diff = (p1 - p2);
+	return sqrt(diff.x * diff.x + diff.y * diff.y + diff.z * diff.z);
 }
 
 void save_shaders(const char* newShaderFile, char newShaderContent[1024]){

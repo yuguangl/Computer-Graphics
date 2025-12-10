@@ -240,10 +240,52 @@ CMakeFiles/g4g1.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/main.cpp -o CMakeFiles/g4g1.dir/src/main.cpp.s
 
+CMakeFiles/g4g1.dir/src/old_main.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/src/old_main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/old_main.cpp
+CMakeFiles/g4g1.dir/src/old_main.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/g4g1.dir/src/old_main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/src/old_main.cpp.o -MF CMakeFiles/g4g1.dir/src/old_main.cpp.o.d -o CMakeFiles/g4g1.dir/src/old_main.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/old_main.cpp
+
+CMakeFiles/g4g1.dir/src/old_main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/src/old_main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/old_main.cpp > CMakeFiles/g4g1.dir/src/old_main.cpp.i
+
+CMakeFiles/g4g1.dir/src/old_main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/src/old_main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/old_main.cpp -o CMakeFiles/g4g1.dir/src/old_main.cpp.s
+
+CMakeFiles/g4g1.dir/src/particle.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/src/particle.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/particle.cpp
+CMakeFiles/g4g1.dir/src/particle.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/g4g1.dir/src/particle.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/src/particle.cpp.o -MF CMakeFiles/g4g1.dir/src/particle.cpp.o.d -o CMakeFiles/g4g1.dir/src/particle.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/particle.cpp
+
+CMakeFiles/g4g1.dir/src/particle.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/src/particle.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/particle.cpp > CMakeFiles/g4g1.dir/src/particle.cpp.i
+
+CMakeFiles/g4g1.dir/src/particle.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/src/particle.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/particle.cpp -o CMakeFiles/g4g1.dir/src/particle.cpp.s
+
+CMakeFiles/g4g1.dir/src/simulate.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/src/simulate.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/simulate.cpp
+CMakeFiles/g4g1.dir/src/simulate.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/g4g1.dir/src/simulate.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/src/simulate.cpp.o -MF CMakeFiles/g4g1.dir/src/simulate.cpp.o.d -o CMakeFiles/g4g1.dir/src/simulate.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/simulate.cpp
+
+CMakeFiles/g4g1.dir/src/simulate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/src/simulate.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/simulate.cpp > CMakeFiles/g4g1.dir/src/simulate.cpp.i
+
+CMakeFiles/g4g1.dir/src/simulate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/src/simulate.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/simulate.cpp -o CMakeFiles/g4g1.dir/src/simulate.cpp.s
+
 CMakeFiles/g4g1.dir/src/utils.cpp.o: CMakeFiles/g4g1.dir/flags.make
 CMakeFiles/g4g1.dir/src/utils.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/utils.cpp
 CMakeFiles/g4g1.dir/src/utils.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/g4g1.dir/src/utils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/g4g1.dir/src/utils.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/src/utils.cpp.o -MF CMakeFiles/g4g1.dir/src/utils.cpp.o.d -o CMakeFiles/g4g1.dir/src/utils.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/utils.cpp
 
 CMakeFiles/g4g1.dir/src/utils.cpp.i: cmake_force
@@ -253,6 +295,20 @@ CMakeFiles/g4g1.dir/src/utils.cpp.i: cmake_force
 CMakeFiles/g4g1.dir/src/utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/src/utils.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/utils.cpp -o CMakeFiles/g4g1.dir/src/utils.cpp.s
+
+CMakeFiles/g4g1.dir/src/variables.cpp.o: CMakeFiles/g4g1.dir/flags.make
+CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/variables.cpp
+CMakeFiles/g4g1.dir/src/variables.cpp.o: CMakeFiles/g4g1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/g4g1.dir/src/variables.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/g4g1.dir/src/variables.cpp.o -MF CMakeFiles/g4g1.dir/src/variables.cpp.o.d -o CMakeFiles/g4g1.dir/src/variables.cpp.o -c /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/variables.cpp
+
+CMakeFiles/g4g1.dir/src/variables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/g4g1.dir/src/variables.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/variables.cpp > CMakeFiles/g4g1.dir/src/variables.cpp.i
+
+CMakeFiles/g4g1.dir/src/variables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/g4g1.dir/src/variables.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/variables.cpp -o CMakeFiles/g4g1.dir/src/variables.cpp.s
 
 # Object files for target g4g1
 g4g1_OBJECTS = \
@@ -268,7 +324,11 @@ g4g1_OBJECTS = \
 "CMakeFiles/g4g1.dir/src/Shader.cpp.o" \
 "CMakeFiles/g4g1.dir/src/dodec.cpp.o" \
 "CMakeFiles/g4g1.dir/src/main.cpp.o" \
-"CMakeFiles/g4g1.dir/src/utils.cpp.o"
+"CMakeFiles/g4g1.dir/src/old_main.cpp.o" \
+"CMakeFiles/g4g1.dir/src/particle.cpp.o" \
+"CMakeFiles/g4g1.dir/src/simulate.cpp.o" \
+"CMakeFiles/g4g1.dir/src/utils.cpp.o" \
+"CMakeFiles/g4g1.dir/src/variables.cpp.o"
 
 # External object files for target g4g1
 g4g1_EXTERNAL_OBJECTS =
@@ -285,12 +345,16 @@ g4g1: CMakeFiles/g4g1.dir/CMakeFiles/4.1.1/CompilerIdCXX/apple-sdk.cpp.o
 g4g1: CMakeFiles/g4g1.dir/src/Shader.cpp.o
 g4g1: CMakeFiles/g4g1.dir/src/dodec.cpp.o
 g4g1: CMakeFiles/g4g1.dir/src/main.cpp.o
+g4g1: CMakeFiles/g4g1.dir/src/old_main.cpp.o
+g4g1: CMakeFiles/g4g1.dir/src/particle.cpp.o
+g4g1: CMakeFiles/g4g1.dir/src/simulate.cpp.o
 g4g1: CMakeFiles/g4g1.dir/src/utils.cpp.o
+g4g1: CMakeFiles/g4g1.dir/src/variables.cpp.o
 g4g1: CMakeFiles/g4g1.dir/build.make
 g4g1: /opt/homebrew/Cellar/assimp/6.0.2/lib/libassimp.6.0.2.dylib
 g4g1: /Library/Developer/CommandLineTools/SDKs/MacOSX15.sdk/usr/lib/libz.tbd
 g4g1: CMakeFiles/g4g1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable g4g1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/yuguang/Projects/Computer-Graphics/src/Project1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable g4g1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/g4g1.dir/link.txt --verbose=$(VERBOSE)
 	/opt/homebrew/bin/cmake -E copy_directory /Users/yuguang/Projects/Computer-Graphics/src/Project1/../../data /Users/yuguang/Projects/Computer-Graphics/src/Project1/build/data
 

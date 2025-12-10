@@ -76,11 +76,16 @@ void CalcFaceNormals(GLfloat*& vertices){
     }
 }
 
+float GetDistance2(vec2 p1, vec2 p2) {
+	vec2 diff = (p1 - p2);
+	return sqrt(diff.x * diff.x + diff.y * diff.y);
+}
+
 void GenerateDodec(GLfloat*& vertices){
     GLfloat phi = (1.0 + sqrt(5))/ 2.0;
     vec2 p1 = vec2(RADIUS*cos(0), RADIUS*sin(0));
     vec2 p2 = vec2(RADIUS*cos(glm::radians(72.0)), RADIUS*sin(glm::radians(72.0)));
-    float side = GetDistance(p1,p2);
+    float side = GetDistance2(p1,p2);
     GLfloat inradius = (pow(phi,3))/(2 * sqrt(pow(phi,2)+1)) * side;
     int offset = 42;
     //generatepentagon(vertices, 0);
