@@ -30,14 +30,12 @@ using namespace std;
 #define STB_IMAGE_IMPLEMENTATION
 
 mat4 view_ = glm::mat4(1.0f);
-float L  = -WIDTH/(2 *(tan( 22.5f * 3.1415926535/180 ))); //why am i using float not GLfloat too lazy to change
+float L = -WIDTH/(2 *(tan( 22.5f * 3.1415926535/180 ))); //why am i using float not GLfloat too lazy to change
 int SizeLoc;
 int old_SizeLoc;
 float size; 
 float default_size = 50.0;
 bool toggle = true;
-
-
 
 bool processInput(GLFWwindow* window) {
 	 if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -154,9 +152,7 @@ void BeginSim() {
     fish_sc.model = Model("../data/fish.obj");
     //fish_sc.id = fish_sc.shader.shaderID;
 
-
 	glfwSwapBuffers(window);
-
 
 	mat4 model = glm::mat4(1.0f);
     view_ = glm::translate(view_, glm::vec3(0.0f,0.0f, L));
@@ -207,7 +203,6 @@ void BeginSim() {
 
     glEnable(GL_DEPTH_TEST);
 
-
     bool wireframe = false;
     int angle = 0;
     int r = RADIUS * 2;
@@ -240,7 +235,7 @@ void BeginSim() {
         glBindVertexArray(VAO);
         //NOTE: 7 because 7 vertices: 1 center + 5 points + 1 repeat to complete the last triangle
         glEnable(GL_PROGRAM_POINT_SIZE);
-        //glDrawArrays(GL_TRIANGLE_STRIP, 0,8);
+        //glDrawArrays(GL_TRIANGLE_STRIP, -1,8);
         //glDrawArrays(GL_TRIANGLE_FAN, 0, 7);
         
         if(toggle){
