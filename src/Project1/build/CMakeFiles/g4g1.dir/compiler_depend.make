@@ -4044,7 +4044,8 @@ CMakeFiles/g4g1.dir/src/main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/sr
   /Users/yuguang/Projects/OpenGL/includes/glm/vec2.hpp \
   /Users/yuguang/Projects/OpenGL/includes/glm/vec3.hpp \
   /Users/yuguang/Projects/OpenGL/includes/glm/vec4.hpp \
-  /Users/yuguang/Projects/OpenGL/includes/glm/vector_relational.hpp
+  /Users/yuguang/Projects/OpenGL/includes/glm/vector_relational.hpp \
+  /Users/yuguang/Projects/OpenGL/includes/stb_image.h
 
 CMakeFiles/g4g1.dir/src/old_main.cpp.o: /Users/yuguang/Projects/Computer-Graphics/src/Project1/src/old_main.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
@@ -10970,6 +10971,8 @@ CMakeFiles/g4g1.dir/src/variables.cpp.o: /Users/yuguang/Projects/Computer-Graphi
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl_backends/cpu_backends/backend.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl_any_all_none_of.h:
+
+/Users/yuguang/Projects/OpenGL/includes/stb_image.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/istream_iterator.h:
 
