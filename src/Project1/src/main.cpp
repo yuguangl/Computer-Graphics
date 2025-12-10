@@ -4,8 +4,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "shader_m.h"
-//#include "model.h"
+
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+
 #include <iostream>
 #include <vector>
 
@@ -28,10 +30,10 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
-//unsigned int loadCubemap(std::vector<std::string> faces);
+unsigned int loadCubemap(std::vector<std::string> faces);
 
 // Settings
-const unsigned int SCR_WIDTH = 720;
+const unsigned int SCR_WIDTH = 1280;
 const unsigned int SCR_HEIGHT = 720;
 
 int main()
@@ -230,7 +232,21 @@ int main()
         glm::vec3 lightPos(5.0f, 5.0f, 5.0f);
         glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
-        // 1. Render inner cubes (opaque)
+        // 1. Draw skybox first (as background)
+        glDepthFunc(GL_LEQUAL);
+        skyboxShader.use();
+        glm::mat4 skyboxView = glm::mat4(glm::mat3(view)); // Remove translation from view matrix
+        skyboxShader.setMat4("view", skyboxView);
+        skyboxShader.setMat4("projection", projection);
+        
+        glBindVertexArray(skyboxVAO);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(0);
+        glDepthFunc(GL_LESS);
+
+        // 2. Render inner cubes (opaque)
         cubeShader.use();
         cubeShader.setMat4("projection", projection);
         cubeShader.setMat4("view", view);
@@ -255,7 +271,7 @@ int main()
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
-        // 2. Render water (semi-transparent)
+        // 3. Render water (semi-transparent)
         glDepthMask(GL_FALSE);
         waterShader.use();
         waterShader.setMat4("projection", projection);
@@ -271,7 +287,7 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glDepthMask(GL_TRUE);
 
-        // 3. Render glass container (most transparent, rendered last)
+        // 4. Render glass container (most transparent, rendered last)
         glDepthMask(GL_FALSE);
         glassShader.use();
         glassShader.setMat4("projection", projection);
@@ -286,20 +302,6 @@ int main()
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glDepthMask(GL_TRUE);
-
-        // 4. Draw skybox last
-        glDepthFunc(GL_LEQUAL);
-        skyboxShader.use();
-        view = glm::mat4(glm::mat3(glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp)));
-        skyboxShader.setMat4("view", view);
-        skyboxShader.setMat4("projection", projection);
-        
-        glBindVertexArray(skyboxVAO);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-        glBindVertexArray(0);
-        glDepthFunc(GL_LESS);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
