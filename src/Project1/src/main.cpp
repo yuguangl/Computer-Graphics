@@ -1,13 +1,19 @@
-// main.cpp  (updated to support water_vertex.glsl + water_fragment.glsl)
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "shader_m.h"
+#include "variables.h"
+#include "dodec.h"
+//#include "Shader.h"
+#include "utils.h"
+#include "model.h"
+#include "simulate.h"
+#include "particle.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+//#include <stb_image.h>
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -16,18 +22,41 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <time.h>
+#include <math.h>
+#include <stdio.h>
+#include <algorithm>
+#include <sys/time.h>
+#include <stdlib.h>
+#include <filesystem>
+
+using namespace std;
+
+#define GLM_ENABLE_EXPERIMENTAL
+#define STB_IMAGE_IMPLEMENTATION
+
+mat4 view_ = glm::mat4(1.0f);
+mat4 model = glm::mat4(1.0f);
+float L = -WIDTH/(2 *(tan( 22.5f * 3.1415926535/180 ))); //why am i using float not GLfloat too lazy to change
+int SizeLoc;
+int old_SizeLoc;
+float size; 
+float default_size = 5.0;
+bool toggle = true;
+int zoom = 4;
+int init_radius = RADIUS;
 
 // Camera
 glm::vec3 cameraPos = glm::vec3(0.0f, 3.0f, 15.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-float yaw = -90.0f;
-float pitch = 0.0f;
+float yaw1 = -90.0f;
+float pitch1 = 0.0f;
 float lastX = 400.0f;
 float lastY = 300.0f;
 bool firstMouse = true;
-const unsigned int SCR_WIDTH = 1280;
-const unsigned int SCR_HEIGHT = 720;
+unsigned int SCR_WIDTH = WIDTH*2;
+unsigned int SCR_HEIGHT = HEIGHT*2;
 
 // Timing
 float deltaTime = 0.0f;
@@ -84,6 +113,47 @@ FBO createColorDepthFBO(int width, int height) {
     return out;
 }
 
+void setup_random(){
+    randomize_init_location(particles);
+    //TODO: this is naive it should fill the hashgrid and check
+    for(int i = 0; i < 5; i++){
+        //HandleCollisions();
+        BruteForceCollisionCheck();
+        updatePositions();
+        checkBounds();
+    }
+    //this is because i chose to do naive way temp so the particle
+    //prevs are all off so im just going to readjust them to be chill
+    adjust_init_prev(particles);
+}
+
+struct shader_contents{
+    const char* shader_file[2];
+    char raw_text[2][1024];
+    Shader shader;
+    int id;
+    map<string, int> uni_loc;
+    map<int,mat4> mats;
+    vec3 light_color;
+    vec3 light_pos;
+    vec4 color;
+    float size;
+    Model model;
+};
+
+void make_shader_contents(shader_contents* sc){
+    sc->shader = Shader(sc->shader_file[0], sc->shader_file[1]);
+    sc->id = sc->shader.ID;
+    sc->uni_loc.insert({"model", glGetUniformLocation(sc->id, "model")});
+    sc->uni_loc.insert({"offset", glGetUniformLocation(sc->id, "offset")});
+    sc->uni_loc.insert({"view", glGetUniformLocation(sc->id, "view")});
+    sc->uni_loc.insert({"proj", glGetUniformLocation(sc->id, "proj")});
+    sc->uni_loc.insert({"color", glGetUniformLocation(sc->id, "color")});
+    sc->uni_loc.insert({"lightColor", glGetUniformLocation(sc->id, "lightColor")});
+    sc->uni_loc.insert({"lightPos", glGetUniformLocation(sc->id, "lightPos")});
+    sc->uni_loc.insert({"size", glGetUniformLocation(sc->id, "size")});
+}
+
 int main()
 {
     // Initialize GLFW
@@ -93,14 +163,25 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Create window
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Water-Filled Glass Tank", NULL, NULL);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "Water-Filled Glass Tank", NULL, NULL);
     if (window == NULL) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwMakeContextCurrent(window);
+	gladLoadGL();
+
+    int width, height;
+    width = SCR_WIDTH;
+    height = SCR_HEIGHT;
+    glfwGetFramebufferSize(window, &width, &height);  
+    glViewport(0, 0, width, height);
+    cout << width << endl;
+    //return 1;
+
+	glfwMakeContextCurrent(window);
+    //glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
     // Start with cursor disabled for camera control
@@ -127,12 +208,83 @@ int main()
 
     // Build and compile shaders
     Shader cubeShader("../shaders/cube_vertex.glsl", "../shaders/cube_fragment.glsl");
-    Shader glassShader("../shaders/glass_vertex.glsl", "../shaders/glass_fragment.glsl");
     Shader waterShader("../shaders/water_vertex.glsl", "../shaders/water_fragment.glsl");
     Shader skyboxShader("../shaders/skybox_vertex.glsl", "../shaders/skybox_fragment.glsl");
     Shader lightShader("../shaders/light_vertex.glsl", "../shaders/light_fragment.glsl");
     Shader volumetricShader("../shaders/volumetric_vertex.glsl", "../shaders/volumetric_fragment.glsl");
     Shader fogShader("../shaders/fog_vertex.glsl", "../shaders/fog_fragment.glsl");
+
+    ///FROM PREV MAin ======================================
+    ///============================
+    ///
+    ///
+    int n = 2*3*7*12;
+
+    shader_contents dodec_sc = {"../shaders/VertexShader_2","../shaders/Old_FragmentShader"};
+    make_shader_contents(&dodec_sc);
+    
+    shader_contents fish_sc = {"../shaders/VertexShader_2", "../shaders/FragmentShader"};
+    make_shader_contents(&fish_sc);
+	//fish_sc.shader = Shader(fish_sc.shader_file[0],fish_sc.shader_file[1]);
+    fish_sc.model = Model("../data/ylfish.obj");
+    //fish_sc.id = fish_sc.shader.shaderID;
+
+	glfwSwapBuffers(window);
+
+    view_ = glm::translate(view_, glm::vec3(-WIDTH/2,-HEIGHT/2, L));
+	mat4 proj = glm::perspective(glm::radians(45.0f), (float)width/(float)height,0.1f,5000.0f);
+
+	initTime = glfwGetTime();
+	initTime2 = glfwGetTime();
+
+	glClearColor(0.1f, 0.3f, 0.8f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+    //TODO: turn this into vec for consistency but if its a vec it might not behave well with imgui sliders
+    GLfloat color[3] = {0.147,0.0, 1.0};
+    GLfloat lightColor[3] = {1.0f,1.0f,1.0f};
+    GLfloat lightPos[3] = {1.0f,-150.0f,150.0f};
+    size = default_size;
+
+	fish_sc.shader.use();
+    glUniform1f(fish_sc.uni_loc["size"],size);
+    glUniform3f(fish_sc.uni_loc["color"], color[0], color[1], color[2]);
+    glUniform3f(fish_sc.uni_loc["lightColor"], lightColor[0], lightColor[1], lightColor[2]);
+    glUniform3f(fish_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
+
+    //defaults
+    dodec_sc.shader.use();
+    glUniform1f(dodec_sc.uni_loc["size"],size);
+    glUniform3f(dodec_sc.uni_loc["color"], color[0], color[1], color[2]);
+    glUniform3f(dodec_sc.uni_loc["lightColor"], lightColor[0], lightColor[1], lightColor[2]);
+    glUniform3f(dodec_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
+
+	GLuint VAO, VBO, instanceVBO;
+	GLfloat* vertices = (GLfloat*)calloc(n,sizeof(GLfloat));
+    
+    //MAKE DODECAHEDRON
+	GenerateDodec(vertices);
+    MakeParticleGrid(particles);
+    setup_random();
+
+    glm::vec3 model_offsets[NUM_PARTICLES];
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glBindVertexArray(VAO);
+
+    //aPos
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, n * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    //Normals
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER,0);
+    glBindVertexArray(0);
+    glEnableVertexAttribArray(3);
+
+//  ========================================================
 
     // Generate procedural DuDv and normal map textures
     unsigned int dudvMap, normalMap;
@@ -223,48 +375,6 @@ int main()
         -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
     };
 
-     float glassVertices[] = {
-        // Front face
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 0.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
-         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
-        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
-
-        // Back face
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
-         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
-
-        // Left face
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-
-        // Right face
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
-         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
-         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
-
-        // Bottom face
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
-         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
-        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
-        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f
-    };
-
     // Skybox vertices
     float skyboxVertices[] = {
         // positions          
@@ -336,20 +446,6 @@ int main()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glBindVertexArray(0);
 
-    // Setup glass tank VAO (without top)
-    unsigned int glassVAO, glassVBO;
-    glGenVertexArrays(1, &glassVAO);
-    glGenBuffers(1, &glassVBO);
-    glBindVertexArray(glassVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, glassVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(glassVertices), glassVertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-    glBindVertexArray(0);
 
     // Setup skybox VAO
     unsigned int skyboxVAO, skyboxVBO;
@@ -364,16 +460,6 @@ int main()
 
     // Setup fullscreen quad for fog overlay
     unsigned int quadVAO, quadVBO;
-    glGenVertexArrays(1, &quadVAO);
-    glGenBuffers(1, &quadVBO);
-    glBindVertexArray(quadVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-    glBindVertexArray(0);
 
     // --- END geometry setup ---
     // Load skybox textures
@@ -395,13 +481,6 @@ int main()
     float tankWidth = 400.0f;
     float tankHeight = 40.0f;
     float tankDepth = 400.0f;
-
-    // Positions for the 3 inner cubes - adjusted for much larger tank
-    glm::vec3 cubePositions[] = {
-        glm::vec3(-100.0f,  5.0f, -50.0f),
-        glm::vec3( 0.0f, -10.0f,  80.0f),
-        glm::vec3( 120.0f,  2.0f, -30.0f)
-    };
 
     // Create reflection and refraction FBOs (same resolution as screen or smaller)
     const int TEX_W = 1024;
@@ -440,13 +519,26 @@ int main()
     glm::vec3 tankScale = glm::vec3(tankWidth, tankHeight, tankDepth);
 
     // Main render loop
+    bool wireframe = false;
+    int angle = 0;
+    int r = RADIUS * 2;
+
+    struct timeval stop, start;
+    gettimeofday(&start, NULL);
+    bool toggle = false;
+    float ae = 0;
     while (!glfwWindowShouldClose(window))
     {
+        gettimeofday(&stop, NULL);
+        double t = ((stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec) / 1000000.0;
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
         processInput(window);
+        finalTime = glfwGetTime();
+        finalTime2 = glfwGetTime();
+        Update(window);
 
         // Start ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
@@ -529,35 +621,11 @@ int main()
         lightModelRef = glm::scale(lightModelRef, glm::vec3(3.0f));
         lightShader.setMat4("model", lightModelRef);
 
-        glBindVertexArray(cubeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        // ==========================================
+        glBindVertexArray(VAO);
+        glEnable(GL_PROGRAM_POINT_SIZE);
+        
 
-        // render inner cubes mirrored
-        cubeShader.use();
-        cubeShader.setMat4("projection", projection);
-        cubeShader.setMat4("view", viewRef);
-        cubeShader.setVec3("lightPos", lightPos); // lighting calc can remain in world space
-        cubeShader.setVec3("viewPos", cameraPosRef);
-        cubeShader.setVec3("lightColor", lightColor);
-        cubeShader.setFloat("time", currentFrame);
-        cubeShader.setVec3("tankScale", tankScale);
-
-        glBindVertexArray(cubeVAO);
-        for (unsigned int i = 0; i < 3; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            // reflect model's y for mirrored pass
-            model = glm::translate(model, glm::vec3(0.0f, (waterY - (model[3].y - waterY)) - model[3].y, 0.0f)); // simplified reflection of translate
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(20.0f * (i + 1)), glm::vec3(1.0f, 0.3f, 0.5f));
-            model = glm::scale(model, glm::vec3(5.0f));
-            cubeShader.setMat4("model", model);
-
-            if (i == 0) cubeShader.setVec3("objectColor", glm::vec3(1.0f, 0.2f, 0.2f));
-            else if (i == 1) cubeShader.setVec3("objectColor", glm::vec3(0.2f, 1.0f, 0.2f));
-            else cubeShader.setVec3("objectColor", glm::vec3(0.2f, 0.2f, 1.0f));
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
@@ -587,6 +655,52 @@ int main()
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glDepthFunc(GL_LESS);
+        if(toggle){
+            dodec_sc.shader.use();
+            for(int i = 0; i < NUM_PARTICLES; i++){
+                Particle p = particles[i];
+                p.curr.z = -p.curr.z;
+                ae += 0.01;
+                model = mat4(1.0f);
+                glm::vec3 dir = glm::normalize(particles[i].curr - particles[i].prev);   // the direction you want to face
+                float yaw2 = atan2(dir.x, dir.z);
+                float pitch2 = -asin(dir.y);
+                model = glm::translate(model, glm::vec3(p.curr));
+                model = glm::rotate(model, yaw2, glm::vec3(0,1,0));
+                model = glm::rotate(model, pitch2, glm::vec3(1,0,0));
+                glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+                glUniformMatrix4fv(dodec_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
+                glUniformMatrix4fv(dodec_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
+                glUniform3f(dodec_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+                for(int j = 0; j < 7*12;j+=7){
+                    glDrawArrays(GL_TRIANGLE_FAN, j, 7);
+                }
+            }
+
+        }else{
+            for(int i = 0; i < NUM_PARTICLES; i++){
+                Particle p = particles[i];
+                ae += 0.01;
+                model = mat4(1.0f);
+                glm::vec3 dir = glm::normalize(particles[i].curr - particles[i].prev);   // the direction you want to face
+                float yaw2 = atan2(dir.x, dir.z);
+                float pitch2 = -asin(dir.y);
+                model = glm::translate(model, glm::vec3(p.curr));
+                model = glm::rotate(model, yaw2, glm::vec3(0,1,0));
+                model = glm::rotate(model, pitch2, glm::vec3(1,0,0));
+
+                glUniformMatrix4fv(fish_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+                glUniformMatrix4fv(fish_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
+                glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                glUniform3f(dodec_sc.uni_loc["offset"],p.curr.x,p.curr.y,p.curr.z);
+                glUniform3f(fish_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+
+                fish_sc.shader.use();
+
+                fish_sc.model.Draw(fish_sc.shader);
+            }
+        }
 
         // light cube (normal)
         lightShader.use();
@@ -598,31 +712,6 @@ int main()
         lightShader.setMat4("model", lightModel);
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
-
-        // inner cubes (normal)
-        cubeShader.use();
-        cubeShader.setMat4("projection", projection);
-        cubeShader.setMat4("view", view);
-        cubeShader.setVec3("lightPos", lightPos);
-        cubeShader.setVec3("viewPos", cameraPos);
-        cubeShader.setVec3("lightColor", lightColor);
-        cubeShader.setFloat("time", currentFrame);
-        cubeShader.setVec3("tankScale", tankScale);
-
-        glBindVertexArray(cubeVAO);
-        for (unsigned int i = 0; i < 3; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(20.0f * (i + 1)), glm::vec3(1.0f, 0.3f, 0.5f));
-            model = glm::scale(model, glm::vec3(5.0f));
-            cubeShader.setMat4("model", model);
-
-            if (i == 0) cubeShader.setVec3("objectColor", glm::vec3(1.0f, 0.2f, 0.2f));
-            else if (i == 1) cubeShader.setVec3("objectColor", glm::vec3(0.2f, 1.0f, 0.2f));
-            else cubeShader.setVec3("objectColor", glm::vec3(0.2f, 0.2f, 1.0f));
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -658,30 +747,57 @@ int main()
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
-        // Draw inner cubes
-        cubeShader.use();
-        cubeShader.setMat4("projection", projection);
-        cubeShader.setMat4("view", view);
-        cubeShader.setVec3("lightPos", lightPos);
-        cubeShader.setVec3("viewPos", cameraPos);
-        cubeShader.setVec3("lightColor", lightColor);
-        cubeShader.setFloat("time", currentFrame);
-        cubeShader.setVec3("tankScale", tankScale);
+        glBindVertexArray(VAO);
+        glEnable(GL_PROGRAM_POINT_SIZE);
+        
+        if(toggle){
+            dodec_sc.shader.use();
+            for(int i = 0; i < NUM_PARTICLES; i++){
+                Particle p = particles[i];
+                p.curr.z = -p.curr.z;
+                ae += 0.01;
+                model = mat4(1.0f);
+                glm::vec3 dir = glm::normalize(particles[i].curr - particles[i].prev);   // the direction you want to face
+                float yaw2 = atan2(dir.x, dir.z);
+                float pitch2 = -asin(dir.y);
+                model = glm::translate(model, glm::vec3(p.curr));
+                model = glm::rotate(model, yaw2, glm::vec3(0,1,0));
+                model = glm::rotate(model, pitch2, glm::vec3(1,0,0));
+                glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+                glUniformMatrix4fv(dodec_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
+                glUniformMatrix4fv(dodec_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
+                glUniform3f(dodec_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+                for(int j = 0; j < 7*12;j+=7){
+                    glDrawArrays(GL_TRIANGLE_FAN, j, 7);
+                }
+            }
 
-        glBindVertexArray(cubeVAO);
-        for (unsigned int i = 0; i < 3; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(20.0f * (i + 1)), glm::vec3(1.0f, 0.3f, 0.5f));
-            model = glm::scale(model, glm::vec3(5.0f));
-            cubeShader.setMat4("model", model);
+        }else{
+            for(int i = 0; i < NUM_PARTICLES; i++){
+                Particle p = particles[i];
+                ae += 0.01;
+                model = mat4(1.0f);
+                glm::vec3 dir = glm::normalize(particles[i].curr - particles[i].prev);   // the direction you want to face
+                float yaw2 = atan2(dir.x, dir.z);
+                float pitch2 = -asin(dir.y);
+                model = glm::translate(model, glm::vec3(p.curr));
+                model = glm::rotate(model, yaw2, glm::vec3(0,1,0));
+                model = glm::rotate(model, pitch2, glm::vec3(1,0,0));
 
-            if (i == 0) cubeShader.setVec3("objectColor", glm::vec3(1.0f, 0.2f, 0.2f));
-            else if (i == 1) cubeShader.setVec3("objectColor", glm::vec3(0.2f, 1.0f, 0.2f));
-            else cubeShader.setVec3("objectColor", glm::vec3(0.2f, 0.2f, 1.0f));
-            glDrawArrays(GL_TRIANGLES, 0, 36);
+                glUniformMatrix4fv(fish_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+                glUniformMatrix4fv(fish_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
+                glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                glUniform3f(dodec_sc.uni_loc["offset"],p.curr.x,p.curr.y,p.curr.z);
+                glUniform3f(fish_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+
+                fish_sc.shader.use();
+
+                fish_sc.model.Draw(fish_sc.shader);
+            }
         }
+
+
 
         // ----------------------------
         // 4) Draw water plane at the top of tank using the offscreen textures
@@ -722,77 +838,35 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glDepthMask(GL_TRUE);
 
-        //// 5) Render volumetric light rays through water (optional) - unchanged from your original
-        //glEnable(GL_BLEND);
-        //glBlendFunc(GL_SRC_ALPHA, GL_ONE); // Additive blending for light
-        //glDepthMask(GL_FALSE);
-
-        //volumetricShader.use();
-        //volumetricShader.setMat4("projection", projection);
-        //volumetricShader.setMat4("view", view);
-        //volumetricShader.setVec3("lightPos", lightPos);
-        //volumetricShader.setVec3("viewPos", cameraPos);
-        //volumetricShader.setVec3("lightColor", lightColor);
-        //volumetricShader.setFloat("time", currentFrame);
-        //volumetricShader.setVec3("tankScale", tankScale);
-
-        //// Render multiple semi-transparent layers for volumetric effect
-        //for (int i = 0; i < 12; i++) {
-        //    float layerHeight = tankScale.y * (i / 12.0f - 0.5f);
-        //    glm::mat4 volumeModel = glm::mat4(1.0f);
-        //    volumeModel = glm::translate(volumeModel, glm::vec3(0.0f, layerHeight, 0.0f));
-        //    volumeModel = glm::scale(volumeModel, glm::vec3(tankScale.x * 0.9f, 0.1f, tankScale.z * 0.9f));
-        //    volumetricShader.setMat4("model", volumeModel);
-        //    volumetricShader.setFloat("layerIndex", i / 12.0f);
-
-        //    glBindVertexArray(cubeVAO);
-        //    glDrawArrays(GL_TRIANGLES, 0, 36);
-        //}
-
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glDepthMask(GL_TRUE);
 
-        // 6. Glass tank (unchanged - rendered last); keep it transparent and scaled
-        glDepthMask(GL_FALSE);
-        glassShader.use();
-        glassShader.setMat4("projection", projection);
-        glassShader.setMat4("view", view);
-        glassShader.setVec3("viewPos", cameraPos);
-        glassShader.setVec3("lightPos", lightPos);
-
-        glm::mat4 glassModel = glm::mat4(1.0f);
-        glassModel = glm::scale(glassModel, tankScale);
-        glassShader.setMat4("model", glassModel);
-
-        glBindVertexArray(glassVAO);
-        // draw glass faces (use the number of vertices you had: 30 for 5 faces)
-        // glDrawArrays(GL_TRIANGLES, 0, 30); // if you want to render only 5 faces
 
         glDepthMask(GL_TRUE);
 
         // 7) Render distance fog overlay (only when underwater) - unchanged
-        bool isUnderwater = cameraPos.y < waterY;
-        if (isUnderwater)
-        {
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glDepthMask(GL_FALSE);
-            glDisable(GL_DEPTH_TEST);
+        //bool isUnderwater = cameraPos.y < waterY;
+        //if (isUnderwater)
+        //{
+        //    glEnable(GL_BLEND);
+        //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        //    glDepthMask(GL_FALSE);
+        //    glDisable(GL_DEPTH_TEST);
 
-            fogShader.use();
-            fogShader.setVec3("viewPos", cameraPos);
-            fogShader.setVec3("fogColor", glm::vec3(0.05f, 0.25f, 0.6f));
-            fogShader.setFloat("fogDensity", 0.5f);
-            fogShader.setFloat("fogStart", 75.0f);
-            fogShader.setFloat("fogEnd", 100.0f);
-            fogShader.setBool("isUnderwater", true);
+        //    fogShader.use();
+        //    fogShader.setVec3("viewPos", cameraPos);
+        //    fogShader.setVec3("fogColor", glm::vec3(0.05f, 0.25f, 0.6f));
+        //    fogShader.setFloat("fogDensity", 0.5f);
+        //    fogShader.setFloat("fogStart", 75.0f);
+        //    fogShader.setFloat("fogEnd", 100.0f);
+        //    fogShader.setBool("isUnderwater", true);
 
-            glBindVertexArray(quadVAO);
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+        //    glBindVertexArray(quadVAO);
+        //    glDrawArrays(GL_TRIANGLES, 0, 6);
 
-            glEnable(GL_DEPTH_TEST);
-            glDepthMask(GL_TRUE);
-        }
+        //    glEnable(GL_DEPTH_TEST);
+        //    glDepthMask(GL_TRUE);
+        //}
 
         // Render ImGui
         ImGui::Render();
@@ -805,8 +879,6 @@ int main()
     // Cleanup (delete created buffers/textures)
     glDeleteVertexArrays(1, &cubeVAO);
     glDeleteBuffers(1, &cubeVBO);
-    glDeleteVertexArrays(1, &glassVAO);
-    glDeleteBuffers(1, &glassVBO);
     glDeleteVertexArrays(1, &skyboxVAO);
     glDeleteBuffers(1, &skyboxVBO);
     glDeleteVertexArrays(1, &quadVAO);
@@ -897,16 +969,16 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     xoffset *= sensitivity;
     yoffset *= sensitivity;
 
-    yaw += xoffset;
-    pitch += yoffset;
+    yaw1 += xoffset;
+    pitch1 += yoffset;
 
-    if (pitch > 89.0f) pitch = 89.0f;
-    if (pitch < -89.0f) pitch = -89.0f;
+    if (pitch1 > 89.0f) pitch1 = 89.0f;
+    if (pitch1 < -89.0f) pitch1 = -89.0f;
 
     glm::vec3 front;
-    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front.y = sin(glm::radians(pitch));
-    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.x = cos(glm::radians(yaw1)) * cos(glm::radians(pitch1));
+    front.y = sin(glm::radians(pitch1));
+    front.z = sin(glm::radians(yaw1)) * cos(glm::radians(pitch1));
     cameraFront = glm::normalize(front);
 }
 
@@ -945,4 +1017,5 @@ unsigned int loadCubemap(std::vector<std::string> faces)
 
     return textureID;
 }
+
 
