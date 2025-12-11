@@ -6,30 +6,41 @@ layout (location = 2) in vec2 aTexCoords;
 out vec3 FragPos;
 out vec3 Normal;
 out vec2 TexCoords;
+out vec3 ToCameraVector;
+out vec3 FromLightVector;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform vec3 viewPos;
+uniform vec3 lightPos;
 uniform float time;
+
+const float waveHeight = 0.01;
 
 void main()
 {
+    // Add wave animation to water surface
     vec3 pos = aPos;
-    
-    // Add wave animation
-    float wave1 = sin(pos.x * 2.0 + time * 2.0) * 0.02;
-    float wave2 = sin(pos.z * 2.5 + time * 1.5) * 0.015;
+    float wave1 = sin(pos.x * 0.5 + time * 1.5) * waveHeight;
+    float wave2 = cos(pos.z * 0.5 + time * 1.2) * waveHeight;
     pos.y += wave1 + wave2;
     
-    FragPos = vec3(model * vec4(pos, 1.0));
+    vec4 worldPos = model * vec4(pos, 1.0);
+    FragPos = worldPos.xyz;
     
-    // Calculate normal with waves for proper lighting
+    // Calculate normal with waves
     vec3 norm = aNormal;
-    norm.x += cos(aPos.x * 2.0 + time * 2.0) * 0.3;
-    norm.z += cos(aPos.z * 2.5 + time * 1.5) * 0.25;
+    norm.x += cos(aPos.x * 0.5 + time * 1.5) * 0.4;
+    norm.z += -sin(aPos.z * 0.5 + time * 1.2) * 0.4;
     Normal = mat3(transpose(inverse(model))) * normalize(norm);
     
-    TexCoords = aTexCoords;
+    // Tiled texture coordinates for detail
+    TexCoords = aTexCoords * 6.0;
     
-    gl_Position = projection * view * vec4(FragPos, 1.0);
+    // Vectors for lighting
+    ToCameraVector = viewPos - FragPos;
+    FromLightVector = FragPos - lightPos;
+    
+    gl_Position = projection * view * worldPos;
 }

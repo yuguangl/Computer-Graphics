@@ -2920,6 +2920,7 @@ CMakeFiles/g4g1.dir/src/main.cpp.o
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h
+ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/TargetConditionals.h
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/___wctype.h
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/__wctype.h
  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/__xlocale.h
@@ -4057,6 +4058,10 @@ CMakeFiles/g4g1.dir/src/main.cpp.o
  /Users/yuguang/Projects/OpenGL/includes/glm/vec3.hpp
  /Users/yuguang/Projects/OpenGL/includes/glm/vec4.hpp
  /Users/yuguang/Projects/OpenGL/includes/glm/vector_relational.hpp
+ /Users/yuguang/Projects/OpenGL/includes/imconfig.h
+ /Users/yuguang/Projects/OpenGL/includes/imgui.h
+ /Users/yuguang/Projects/OpenGL/includes/imgui_impl_glfw.h
+ /Users/yuguang/Projects/OpenGL/includes/imgui_impl_opengl3.h
  /Users/yuguang/Projects/OpenGL/includes/stb_image.h
 
 CMakeFiles/g4g1.dir/src/old_main.cpp.o

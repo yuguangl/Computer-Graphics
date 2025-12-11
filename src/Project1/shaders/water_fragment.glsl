@@ -4,63 +4,80 @@ out vec4 FragColor;
 in vec3 FragPos;
 in vec3 Normal;
 in vec2 TexCoords;
+in vec3 ToCameraVector;
+in vec3 FromLightVector;
 
 uniform vec3 viewPos;
 uniform vec3 lightPos;
 uniform vec3 lightColor;
 uniform float time;
+uniform vec3 tankScale;
+
+uniform sampler2D dudvMap;
+uniform sampler2D normalMap;
+
+const float waveStrength = 0.02;
+const float shineDamper = 20.0;
+const float reflectivity = 0.6;
 
 void main()
 {
-    vec3 norm = normalize(Normal);
-    vec3 viewDir = normalize(viewPos - FragPos);
-    vec3 lightDir = normalize(lightPos - FragPos);
+    // Animated DuDv distortion (move factor based on time)
+    float moveFactor = 0.0f;//mod(time * 0.001, 1.0);
     
-    // Fresnel effect for water - more reflective at grazing angles
-    float fresnel = pow(1.0 - max(dot(viewDir, norm), 0.0), 3.0);
-    fresnel = mix(0.02, 1.0, fresnel);
+    vec2 distortedTexCoords = texture(dudvMap, vec2(TexCoords.x + moveFactor, TexCoords.y)).rg * 0.1;
+    distortedTexCoords = TexCoords + vec2(distortedTexCoords.x, distortedTexCoords.y + moveFactor);
+    vec2 totalDistortion = (texture(dudvMap, distortedTexCoords).rg * 2.0 - 1.0) * waveStrength;
     
-    // Water base colors
-    vec3 waterColor = vec3(0.05, 0.3, 0.5);
-    vec3 deepWaterColor = vec3(0.0, 0.15, 0.3);
+    // Sample normal map with distortion
+    vec4 normalMapColor = texture(normalMap, distortedTexCoords);
+    vec3 normal = vec3(normalMapColor.r * 2.0 - 1.0, normalMapColor.b * 3.0, normalMapColor.g * 2.0 - 1.0);
+    normal = normalize(normal);
     
-    // Lighting calculations
-    // Diffuse
-    float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = diff * lightColor;
+    // Combine with mesh normal
+    vec3 detailedNormal = normalize(Normal + normal * 0.5);
     
-    // Specular - water is quite reflective
-    vec3 halfwayDir = normalize(lightDir + viewDir);
-    float spec = pow(max(dot(norm, halfwayDir), 0.0), 64.0);
-    vec3 specular = spec * lightColor * 0.8;
+    vec3 viewVector = normalize(ToCameraVector);
+    vec3 lightVector = normalize(-FromLightVector);
     
-    // Subsurface scattering approximation
-    vec3 lightDirInv = -lightDir;
-    float backLight = max(dot(norm, lightDirInv), 0.0);
-    vec3 subsurface = backLight * waterColor * 0.3;
+    // Fresnel effect - more reflective at grazing angles
+    float refractiveFactor = dot(viewVector, vec3(0.0, 1.0, 0.0));
+    refractiveFactor = pow(refractiveFactor, 2.0);
     
-    // Mix colors based on viewing angle and add lighting
-    vec3 color = mix(waterColor, deepWaterColor, fresnel * 0.5);
-    color = color * (0.4 + diffuse * 0.6) + specular + subsurface;
+    // Water colors
+    vec3 waterColor = vec3(0.1, 0.4, 0.8);
+    vec3 deepWaterColor = vec3(0.0, 0.3, 0.5);
     
-    // Animated caustic patterns on water surface
-    vec2 causticCoord = TexCoords * 10.0;
-    float caustic1 = sin(causticCoord.x * 3.0 + time * 2.0) * sin(causticCoord.y * 3.0 + time * 1.5);
-    float caustic2 = sin(causticCoord.x * 4.5 - time * 1.8) * sin(causticCoord.y * 4.5 + time * 2.2);
-    float caustic = (caustic1 + caustic2) * 0.05 + 0.95;
-    caustic = pow(max(caustic, 0.0), 1.5);
+    // Diffuse lighting
+    float diff = max(dot(detailedNormal, lightVector), 0.0);
+    vec3 diffuse = diff * lightColor * 1.2;
     
-    color *= caustic;
+    // Specular highlights using reflected light
+    vec3 reflectedLight = reflect(normalize(FromLightVector), detailedNormal);
+    float specular = max(dot(reflectedLight, viewVector), 0.0);
+    specular = pow(specular, shineDamper);
+    vec3 specularHighlights = lightColor * specular * reflectivity;
     
-    // Distance-based attenuation
-    float dist = length(lightPos - FragPos);
-    float attenuation = 1.0 / (1.0 + 0.09 * dist + 0.032 * dist * dist);
+    // Mix water colors based on viewing angle
+    vec3 color = mix(deepWaterColor, waterColor, refractiveFactor);
     
-    color *= (0.3 + attenuation * 0.7);
+    // Add lighting
+    color = color * (0.5 + diffuse * 0.5) + specularHighlights;
     
-    // Water transparency - more transparent when looking straight down
-    float viewAngle = max(dot(viewDir, norm), 0.0);
-    float alpha = mix(0.7, 0.3, pow(viewAngle, 2.0));
+    // Add subtle blue tint
+    color = mix(color, vec3(0.0, 0.3, 0.5), 0.2);
+    
+    // Fog effect
+    float fogDistance = length(viewPos - FragPos);
+    float fogDensity = 0.08;
+    float fogFactor = exp(-fogDistance * fogDensity);
+    fogFactor = clamp(fogFactor, 0.0, 1.0);
+    
+    vec3 fogColor = deepWaterColor;
+    color = mix(fogColor, color, fogFactor);
+    
+    // Water transparency with Fresnel
+    float alpha = mix(0.7, 0.3, refractiveFactor);
     
     FragColor = vec4(color, alpha);
 }

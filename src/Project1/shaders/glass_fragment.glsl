@@ -16,18 +16,18 @@ void main()
     float fresnel = pow(1.0 - max(dot(viewDir, norm), 0.0), 3.0);
     fresnel = mix(0.04, 1.0, fresnel);
     
-    // Glass color with slight blue-green tint
-    vec3 glassColor = vec3(0.9, 0.95, 1.0);
+    // Glass color with slight blue-green tint - brighter
+    vec3 glassColor = vec3(1.0, 1.0, 1.0);
     
     // Specular highlights
     vec3 lightDir = normalize(lightPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 64);
     
-    vec3 result = glassColor * (0.2 + spec * 0.8);
+    vec3 result = glassColor * (0.4 + spec * 0.6);
     
-    // Glass transparency - more transparent when looking straight on
-    float alpha = mix(0.15, 0.4, fresnel);
+    // Glass transparency - lighter and more transparent
+    float alpha = mix(0.08, 0.25, fresnel);
     
     FragColor = vec4(result, alpha);
 }
