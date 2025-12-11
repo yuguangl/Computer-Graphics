@@ -1,19 +1,27 @@
 #version 330 core
 out vec4 FragColor;
-
 in vec3 Normal;  
 in vec3 FragPos;  
   
 uniform vec3 lightPos; 
+uniform vec3 viewPos;  // camera position
 uniform vec3 lightColor;
 uniform vec3 color;
-
 in vec2 TexCoord;
-
 uniform sampler2D texture_diffuse1;
 
 void main()
 {
+    // Calculate distance from fragment to light
+    float distance = length(lightPos - FragPos);
+    
+    // Attenuation calculation (quadratic falloff)
+    // You can adjust these constants to control how quickly light falls off
+    float constant = 1.0;
+    float linear = 0.009;      // Adjust this for falloff rate
+    float quadratic = 0.0032;  // Adjust this for falloff rate
+    float attenuation = 1.0 / (linear * distance);
+    
     // ambient
     float ambientStrength = 0.1;
     vec3 ambient = ambientStrength * lightColor;
@@ -23,12 +31,21 @@ void main()
     vec3 lightDir = normalize(lightPos - FragPos);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * lightColor;
+    
+    // specular
+    float specularStrength = 0.5;
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    vec3 specular = specularStrength * spec * lightColor;
+    
+    // Apply attenuation to diffuse and specular (but not ambient)
+    ambient *= attenuation;  // Optional: remove this line if you want ambient to not attenuate
+    diffuse *= attenuation;
+    specular *= attenuation;
             
-    vec3 result1 = (ambient + diffuse) * color;
-    vec3 lighting = (ambient + diffuse);
+    vec3 lighting = (ambient + diffuse + specular);
     vec4 tex = texture(texture_diffuse1, TexCoord);
     vec3 result = lighting * tex.rgb;
     FragColor = vec4(result, tex.a);
-    //FragColor = vec4(result1, 1.0);
-
-} 
+}

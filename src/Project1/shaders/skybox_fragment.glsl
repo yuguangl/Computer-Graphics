@@ -18,7 +18,7 @@ void main()
     {
         // Apply distance fog to skybox
         float distance = length(TexCoords) * 50.0; // Scale factor for fog distance
-        float fogFactor = exp(-distance * fogDensity);
+        float fogFactor = exp(-distance * fogDensity/2);
         fogFactor = clamp(fogFactor, 0.0, 1.0);
         
         vec3 finalColor = mix(fogColor, skyboxColor.rgb, fogFactor);

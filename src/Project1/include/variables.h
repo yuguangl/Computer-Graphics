@@ -25,6 +25,7 @@ struct Particle {
 	vec3 prev;
 	vec3 curr;
 	vec3 press;
+    int id;
 
 };
 
@@ -32,14 +33,11 @@ using namespace std;
 
 #define PI 3.1415926535897932384626433
 #define SEGMENTS 15 // just dont go over 90 for some reason
-#define WIDTH 800//TODO: bro can you make this fullscreen or relative to screen size or smth  man
-#define HEIGHT 800
-#define DEPTH 800
 #define TARGET_FPS 40 
 #define G 0
 //TIME_STEP IS ACTUALLY USED AS A SPEED FACTOR SO THE LOWER IT IS, THE SLOWER THE SIM
 #define TIME_STEP (1.0f / TARGET_FPS)
-#define NUM_SUBSTEPS 8 
+#define NUM_SUBSTEPS 2 
 #define SUBSTEP (TIME_STEP/NUM_SUBSTEPS)
 #define SMOOTHING_RADIUS (RADIUS * 4)
 #define CELL_SIZE (RADIUS * 4)
@@ -75,6 +73,9 @@ extern bool hashError;
 extern GLFWwindow* window;
 extern Particle particles[MAX_PARTICLES];
 extern int RADIUS;
+extern int WIDTH;
+extern int HEIGHT;
+extern int DEPTH;
 
 //tunable boid parameters
 extern float avoid_radius;

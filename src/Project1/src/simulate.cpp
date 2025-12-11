@@ -245,8 +245,8 @@ void flock(){
             if(i != j && distance < avoid_radius){
                 close += particles[i].curr - particles[j].curr;
             }
-            //TODO: draw in the attract radius
-            else if(i != j && distance < attract_radius){
+            
+            else if(i != j && distance < attract_radius && particles[i].id == particles[j].id){
                 center_avg += particles[j].curr;
                 disp_avg += particles[j].curr - particles[j].prev;
                 near_boids++;
@@ -322,9 +322,6 @@ void CalculateForces(Particle particles[MAX_PARTICLES]) {
 void updatePositions() {
 
     //FLOCKING FUNCTIONS
-    flock();
-    check_displacement();
-    check_margins();
     //----------
 	for (int i = 0; i < NUM_PARTICLES; i++) {
 		vec3 displacement = particles[i].curr - particles[i].prev;
@@ -403,10 +400,13 @@ void Update(GLFWwindow* window) {
             //PopulateGrid();
             //applyForces();
         for (int i = 0; i < NUM_SUBSTEPS; i++) {
+            flock();
             //PopulateGrid();
             //HandleCollisions();
             BruteForceCollisionCheck();
         }
+        check_displacement();
+        check_margins();
         updatePositions();
         checkBounds();
     frames2++;

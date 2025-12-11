@@ -10,13 +10,17 @@ uniform float size;
 out vec2 TexCoord;
 out vec3 Normal;
 out vec3 FragPos;
+
 void main()
 {
     TexCoord = aTexCoord;
     vec3 adj_pos = size * aPos;
     vec4 pos = vec4(adj_pos.x, adj_pos.y, adj_pos.z, 1.0);
-	gl_Position = proj * view * model * pos;
-    //FragPos = vec3(model * vec4(pos.x, pos.y, pos.z, 1.0));
-    FragPos = vec3(model * vec4(aPos, 1.0));
-    Normal = aNormal;
+    gl_Position = proj * view * model * pos;
+    
+    // Transform position to world space
+    FragPos = vec3(model * vec4(adj_pos, 1.0));  // Use adj_pos, not aPos
+    
+    // Transform normal to world space using normal matrix
+    Normal = mat3(transpose(inverse(model))) * aNormal;  // CRITICAL FIX
 }

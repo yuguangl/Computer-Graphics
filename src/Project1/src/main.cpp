@@ -41,13 +41,13 @@ float L = -WIDTH/(2 *(tan( 22.5f * 3.1415926535/180 ))); //why am i using float 
 int SizeLoc;
 int old_SizeLoc;
 float size; 
-float default_size = 5.0;
+float default_size = 10.0;
 bool toggle = true;
 int zoom = 4;
 int init_radius = RADIUS;
 
 // Camera
-glm::vec3 cameraPos = glm::vec3(0.0f, 3.0f, 15.0f);
+glm::vec3 cameraPos = glm::vec3(500.0f, 200.0f, 500.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 float yaw1 = -90.0f;
@@ -223,16 +223,21 @@ int main()
     shader_contents dodec_sc = {"../shaders/VertexShader_2","../shaders/Old_FragmentShader"};
     make_shader_contents(&dodec_sc);
     
-    shader_contents fish_sc = {"../shaders/VertexShader_2", "../shaders/FragmentShader"};
-    make_shader_contents(&fish_sc);
-	//fish_sc.shader = Shader(fish_sc.shader_file[0],fish_sc.shader_file[1]);
-    fish_sc.model = Model("../data/ylfish.obj");
-    //fish_sc.id = fish_sc.shader.shaderID;
+    shader_contents fish_sc1 = {"../shaders/VertexShader_2", "../shaders/FragmentShader"};
+    make_shader_contents(&fish_sc1);
+    fish_sc1.model = Model("../data/fish_aligned_1.obj");
+    shader_contents fish_sc2 = {"../shaders/VertexShader_2", "../shaders/FragmentShader"};
+    make_shader_contents(&fish_sc2);
+    fish_sc2.model = Model("../data/fish_aligned_2.obj");
+    shader_contents fish_sc3 = {"../shaders/VertexShader_2", "../shaders/FragmentShader"};
+    make_shader_contents(&fish_sc3);
+    fish_sc3.model = Model("../data/fish_aligned_3.obj");
+    shader_contents fish_sc[] = {fish_sc1, fish_sc2, fish_sc3};
 
 	glfwSwapBuffers(window);
 
     view_ = glm::translate(view_, glm::vec3(-WIDTH/2,-HEIGHT/2, L));
-	mat4 proj = glm::perspective(glm::radians(45.0f), (float)width/(float)height,0.1f,5000.0f);
+	mat4 proj = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH/(float)SCR_HEIGHT,0.1f,5000.0f);
 
 	initTime = glfwGetTime();
 	initTime2 = glfwGetTime();
@@ -243,21 +248,22 @@ int main()
     //TODO: turn this into vec for consistency but if its a vec it might not behave well with imgui sliders
     GLfloat color[3] = {0.147,0.0, 1.0};
     GLfloat lightColor[3] = {1.0f,1.0f,1.0f};
-    GLfloat lightPos[3] = {1.0f,-150.0f,150.0f};
     size = default_size;
 
-	fish_sc.shader.use();
-    glUniform1f(fish_sc.uni_loc["size"],size);
-    glUniform3f(fish_sc.uni_loc["color"], color[0], color[1], color[2]);
-    glUniform3f(fish_sc.uni_loc["lightColor"], lightColor[0], lightColor[1], lightColor[2]);
-    glUniform3f(fish_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
+    for(int i = 0; i < 3; i++){
+        fish_sc[i].shader.use();
+        glUniform1f(fish_sc[i].uni_loc["size"],size);
+        glUniform3f(fish_sc[i].uni_loc["color"], color[0], color[1], color[2]);
+        glUniform3f(fish_sc[i].uni_loc["lightColor"], lightColor[0], lightColor[1], lightColor[2]);
+    }
+    //glUniform3f(fish_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
 
     //defaults
     dodec_sc.shader.use();
     glUniform1f(dodec_sc.uni_loc["size"],size);
     glUniform3f(dodec_sc.uni_loc["color"], color[0], color[1], color[2]);
     glUniform3f(dodec_sc.uni_loc["lightColor"], lightColor[0], lightColor[1], lightColor[2]);
-    glUniform3f(dodec_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
+    //glUniform3f(dodec_sc.uni_loc["lightPos"], lightPos[0], lightPos[1], lightPos[2]);
 
 	GLuint VAO, VBO, instanceVBO;
 	GLfloat* vertices = (GLfloat*)calloc(n,sizeof(GLfloat));
@@ -478,9 +484,12 @@ int main()
     skyboxShader.setInt("skybox", 0);
 
     // Tank dimensions (width, height, depth) - adjustable with ImGui
-    float tankWidth = 400.0f;
-    float tankHeight = 40.0f;
-    float tankDepth = 400.0f;
+    float tankWidth = 4000.0f;
+    float tankHeight = 2000.0f;
+    float tankDepth = 4000.0f;
+    WIDTH = tankWidth*4;
+    HEIGHT = tankHeight/2 - 300;
+    DEPTH = tankDepth*4;
 
     // Create reflection and refraction FBOs (same resolution as screen or smaller)
     const int TEX_W = 1024;
@@ -510,6 +519,7 @@ int main()
 
     // Configure water shader sampler bindings (one-time)
     waterShader.use();
+    waterShader.setVec3("cameraPosition", cameraPos);
     waterShader.setInt("reflectionTexture", 0);
     waterShader.setInt("refractionTexture", 1);
     waterShader.setInt("waterDudv", 2);
@@ -549,9 +559,9 @@ int main()
         ImGui::Begin("Tank Controls");
         ImGui::Text("Press TAB to toggle UI mode");
         ImGui::Text("Adjust Tank Dimensions");
-        ImGui::SliderFloat("Width", &tankWidth, 10.0f, 100.0f);
-        ImGui::SliderFloat("Height", &tankHeight, 10.0f, 60.0f);
-        ImGui::SliderFloat("Depth", &tankDepth, 10.0f, 50.0f);
+        //ImGui::SliderFloat("Width", &tankWidth, 10.0f, 100.0f);
+        //ImGui::SliderFloat("Height", &tankHeight, 10.0f, 60.0f);
+        //ImGui::SliderFloat("Depth", &tankDepth, 10.0f, 50.0f);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImGui::End();
 
@@ -561,16 +571,18 @@ int main()
         // Compute matrices
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 5000.0f);
         glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        ////view = glm::translate(view, glm::vec3(-WIDTH,-HEIGHT, 0.0f));
 
         // Light
         float lightRadius = 200.0f;
-        float lightHeight = tankScale.y + 10.0f;
+        float lightHeight = 10.0f;
         float lightAngle = currentFrame * 0.4f;
         glm::vec3 lightPos(
             sin(lightAngle) * lightRadius,
             lightHeight,
             cos(lightAngle) * lightRadius
         );
+        lightPos = cameraPos;
         glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
         // compute water Y at top of tank (user specified): y = tankScale.y * 0.5f
@@ -612,14 +624,14 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glDepthFunc(GL_LESS);
 
-        // render light cube (mirrored)
-        lightShader.use();
-        lightShader.setMat4("projection", projection);
-        lightShader.setMat4("view", viewRef);
-        glm::mat4 lightModelRef = glm::mat4(1.0f);
-        lightModelRef = glm::translate(lightModelRef, glm::vec3(lightPos.x, waterY - (lightPos.y - waterY), lightPos.z));
-        lightModelRef = glm::scale(lightModelRef, glm::vec3(3.0f));
-        lightShader.setMat4("model", lightModelRef);
+        //// render light cube (mirrored)
+        //lightShader.use();
+        //lightShader.setMat4("projection", projection);
+        //lightShader.setMat4("view", viewRef);
+        //glm::mat4 lightModelRef = glm::mat4(1.0f);
+        //lightModelRef = glm::translate(lightModelRef, glm::vec3(lightPos.x, waterY - (lightPos.y - waterY), lightPos.z));
+        //lightModelRef = glm::scale(lightModelRef, glm::vec3(3.0f));
+        //lightShader.setMat4("model", lightModelRef);
 
         // ==========================================
         glBindVertexArray(VAO);
@@ -668,11 +680,13 @@ int main()
                 model = glm::translate(model, glm::vec3(p.curr));
                 model = glm::rotate(model, yaw2, glm::vec3(0,1,0));
                 model = glm::rotate(model, pitch2, glm::vec3(1,0,0));
-                glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+                model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0,1,0));
+                glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(projection));
                 glUniformMatrix4fv(dodec_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
                 glUniformMatrix4fv(dodec_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
                 //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
-                glUniform3f(dodec_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+                glUniform3f(dodec_sc.uni_loc["lightPos"], lightPos.x, lightPos.y, lightPos.z);
+                //glUniform3f(fish_sc.uni_loc["viewPos"], cameraPos.x, cameraPos.y, cameraPos.z);
                 for(int j = 0; j < 7*12;j+=7){
                     glDrawArrays(GL_TRIANGLE_FAN, j, 7);
                 }
@@ -689,16 +703,18 @@ int main()
                 model = glm::translate(model, glm::vec3(p.curr));
                 model = glm::rotate(model, yaw2, glm::vec3(0,1,0));
                 model = glm::rotate(model, pitch2, glm::vec3(1,0,0));
+                model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0,1,0));
 
-                glUniformMatrix4fv(fish_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
-                glUniformMatrix4fv(fish_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
-                glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
-                glUniform3f(dodec_sc.uni_loc["offset"],p.curr.x,p.curr.y,p.curr.z);
-                glUniform3f(fish_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+                glUniformMatrix4fv(fish_sc[p.id].uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(projection));
+                glUniformMatrix4fv(fish_sc[p.id].uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
+                glUniformMatrix4fv(fish_sc[p.id].uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                glUniform3f(fish_sc[p.id].uni_loc["offset"],p.curr.x,p.curr.y,p.curr.z);
+                glUniform3f(fish_sc[p.id].uni_loc["viewPos"], cameraPos.x, cameraPos.y, cameraPos.z);
+                glUniform3f(fish_sc[p.id].uni_loc["lightPos"], lightPos.x, lightPos.y, lightPos.z);
 
-                fish_sc.shader.use();
+                fish_sc[p.id].shader.use();
 
-                fish_sc.model.Draw(fish_sc.shader);
+                fish_sc[p.id].model.Draw(fish_sc[p.id].shader);
             }
         }
 
@@ -745,7 +761,7 @@ int main()
         lightShader.setMat4("view", view);
         lightShader.setMat4("model", lightModel);
         glBindVertexArray(cubeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        //glDrawArrays(GL_TRIANGLES, 0, 36);
 
         glBindVertexArray(VAO);
         glEnable(GL_PROGRAM_POINT_SIZE);
@@ -763,11 +779,13 @@ int main()
                 model = glm::translate(model, glm::vec3(p.curr));
                 model = glm::rotate(model, yaw2, glm::vec3(0,1,0));
                 model = glm::rotate(model, pitch2, glm::vec3(1,0,0));
-                glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
+                model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0,1,0));
+                glUniformMatrix4fv(dodec_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(projection));
                 glUniformMatrix4fv(dodec_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
                 glUniformMatrix4fv(dodec_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                glUniform3f(dodec_sc.uni_loc["viewPos"], cameraPos.x, cameraPos.y, cameraPos.z);
                 //glUniform3f(lightPosLoc, r * cos(t), lightPos[1], r * sin(t));
-                glUniform3f(dodec_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+                glUniform3f(dodec_sc.uni_loc["lightPos"], lightPos.x, lightPos.y, lightPos.z);
                 for(int j = 0; j < 7*12;j+=7){
                     glDrawArrays(GL_TRIANGLE_FAN, j, 7);
                 }
@@ -784,16 +802,18 @@ int main()
                 model = glm::translate(model, glm::vec3(p.curr));
                 model = glm::rotate(model, yaw2, glm::vec3(0,1,0));
                 model = glm::rotate(model, pitch2, glm::vec3(1,0,0));
+                model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0,1,0));
 
-                glUniformMatrix4fv(fish_sc.uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(proj));
-                glUniformMatrix4fv(fish_sc.uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
-                glUniformMatrix4fv(fish_sc.uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
-                glUniform3f(dodec_sc.uni_loc["offset"],p.curr.x,p.curr.y,p.curr.z);
-                glUniform3f(fish_sc.uni_loc["lightPos"], r * cos(t), r * sin(t), r * sin(t));
+                glUniformMatrix4fv(fish_sc[p.id].uni_loc["proj"], 1, GL_FALSE, glm::value_ptr(projection));
+                glUniformMatrix4fv(fish_sc[p.id].uni_loc["view"], 1, GL_FALSE, glm::value_ptr(view));
+                glUniformMatrix4fv(fish_sc[p.id].uni_loc["model"], 1, GL_FALSE, glm::value_ptr(model));
+                glUniform3f(fish_sc[p.id].uni_loc["offset"],p.curr.x,p.curr.y,p.curr.z);
+                glUniform3f(fish_sc[p.id].uni_loc["viewPos"], cameraPos.x, cameraPos.y, cameraPos.z);
+                glUniform3f(fish_sc[p.id].uni_loc["lightPos"], lightPos.x, lightPos.y, lightPos.z);
 
-                fish_sc.shader.use();
+                fish_sc[p.id].shader.use();
 
-                fish_sc.model.Draw(fish_sc.shader);
+                fish_sc[p.id].model.Draw(fish_sc[p.id].shader);
             }
         }
 
@@ -932,7 +952,7 @@ void processInput(GLFWwindow *window)
 
     if (!uiMode)
     {
-        float cameraSpeed = 20.0f * deltaTime;
+        float cameraSpeed = 500.0f * deltaTime;
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
             cameraPos += cameraSpeed * cameraFront;
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)

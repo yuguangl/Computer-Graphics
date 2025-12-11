@@ -5,7 +5,7 @@
 #include "variables.h"
 using namespace glm;
 
-int NUM_PARTICLES = 100; //if theres no particles it breaks
+int NUM_PARTICLES = 700; //if theres no particles it breaks
 bool pause = false; //obvious
 double prevTime = 0; // used to make sure button presses work properly
 double timeOffset = 0;//used to offset time after pause
@@ -27,11 +27,14 @@ bool mouseForce = false;
 bool hashError;
 GLFWwindow* window;
 Particle particles[MAX_PARTICLES];
-int RADIUS = 3; // >= 4 for some reason AND NOT 7 BECAUSE WEIRD BUG HAPPENS maybe hashing issue again? and 15 wtfwtfwtfwtfwtf things become nan?
+int RADIUS = 2; // >= 4 for some reason AND NOT 7 BECAUSE WEIRD BUG HAPPENS maybe hashing issue again? and 15 wtfwtfwtfwtfwtf things become nan?
+int WIDTH = 800;
+int HEIGHT = 800;
+int DEPTH = 800;
 
 //tunable boid parameters
-float avoid_radius = RADIUS * 4;
-float attract_radius = RADIUS * 10;
+float avoid_radius = RADIUS * 3;
+float attract_radius = RADIUS * 30;
 float alignment_factor = 0.05;
 float avoid_factor = 0.05;
 float centering_factor = 0.0005;
