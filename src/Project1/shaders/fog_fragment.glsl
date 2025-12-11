@@ -13,7 +13,7 @@ uniform bool isUnderwater;
 void main()
 {
     // Only apply fog if underwater (already checked in C++ code)
-    if (!isUnderwater)
+    if (!isUnderwater || isUnderwater)
     {
         discard; // Don't render anything if not underwater
     }
